@@ -1431,6 +1431,32 @@ export const destinations: Destination[] = [
       "Free walking tour from Liberty Square.",
     ],
   },
+  {
+    slug: "siem-reap-cambodia",
+    name: "Siem Reap",
+    country: "Cambodia",
+    region: "Asia",
+    emoji: "🛕",
+    tagline: "Gateway to Angkor — temples swallowed by jungle.",
+    bestTime: "November – February",
+    currency: "USD",
+    costs: { stay: 12, food: 7, transport: 5, activities: 12 },
+    places: [
+      { name: "Angkor Wat sunrise", category: "Landmark", why: "Largest religious monument on Earth, glowing pink." },
+      { name: "Bayon temple", category: "Landmark", why: "216 serene stone faces stare back at you." },
+      { name: "Ta Prohm", category: "Culture", why: "The Tomb Raider temple, strangled by silk-cotton roots." },
+      { name: "Banteay Srei", category: "Culture", why: "Pink-sandstone carving so fine it looks woven." },
+      { name: "Tonle Sap floating villages", category: "Adventure", why: "Stilt houses on the great lake." },
+      { name: "Pub Street + night market", category: "Culture", why: "$0.50 draft beer and lok lak skewers.", free: true },
+      { name: "Fish amok", category: "Food", why: "Coconut-curry custard steamed in banana leaf." },
+    ],
+    tips: [
+      "Buy 3-day Angkor pass — beats one rushed day.",
+      "Tuk-tuk full-day temple loop ~$20.",
+      "Bring cash USD; small dollars preferred.",
+      "Cover shoulders + knees to enter temples.",
+    ],
+  },
 ];
 
 export const getDestination = (slug: string) =>
