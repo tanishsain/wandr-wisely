@@ -1,12 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
-import { Search, MapPin, Clock, DollarSign, Lightbulb, Tag } from "lucide-react";
+import { Search, MapPin, Clock, DollarSign, Lightbulb, Tag, Building2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { DestinationCard } from "@/components/destination-card";
+import { HotelAffiliateCard } from "@/components/hotel-affiliate-card";
 import { destinations, getDestination, type Destination } from "@/data/destinations";
+import { citiesFor } from "@/data/cities";
 
 const searchSchema = z.object({
   q: fallback(z.string(), "").default(""),
