@@ -118,10 +118,10 @@ function HomePage() {
             {
               icon: Sparkles,
               tint: "bg-primary text-primary-foreground",
-              title: "Plan a trip",
-              desc: "Build a day-by-day itinerary with hostels, local food, and free activities.",
+              title: "AI trip planner",
+              desc: "Generate a day-by-day itinerary tuned to your style, budget, and interests. Pro unlocks the full trip.",
               to: "/plan" as const,
-              cta: "Start planning",
+              cta: "Try the AI planner",
             },
             {
               icon: Wallet,
