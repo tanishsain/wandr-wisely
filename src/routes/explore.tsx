@@ -155,6 +155,10 @@ function ExplorePage() {
 function DestinationDetail({ dest }: { dest: Destination }) {
   const total =
     dest.costs.stay + dest.costs.food + dest.costs.transport + dest.costs.activities;
+  const cities = citiesFor(dest.slug);
+  const cheapestNight = cities.length
+    ? Math.min(...cities.map((c) => c.hotelFromUSD))
+    : undefined;
 
   return (
     <section className="mx-auto max-w-6xl px-5 py-12">
