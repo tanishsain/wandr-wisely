@@ -8,6 +8,7 @@ export function SiteHeader() {
   const links = [
     { to: "/", label: "Home" },
     { to: "/explore", label: "Explore" },
+    { to: "/attractions", label: "Attractions" },
     { to: "/plan", label: "Plan a Trip" },
     { to: "/estimate", label: "Cost Estimator" },
     { to: "/about", label: "About" },

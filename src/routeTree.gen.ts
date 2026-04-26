@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PlanRouteImport } from './routes/plan'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as EstimateRouteImport } from './routes/estimate'
+import { Route as AttractionsRouteImport } from './routes/attractions'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -30,6 +31,11 @@ const EstimateRoute = EstimateRouteImport.update({
   path: '/estimate',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AttractionsRoute = AttractionsRouteImport.update({
+  id: '/attractions',
+  path: '/attractions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -44,6 +50,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/attractions': typeof AttractionsRoute
   '/estimate': typeof EstimateRoute
   '/explore': typeof ExploreRoute
   '/plan': typeof PlanRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/attractions': typeof AttractionsRoute
   '/estimate': typeof EstimateRoute
   '/explore': typeof ExploreRoute
   '/plan': typeof PlanRoute
@@ -59,21 +67,36 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/attractions': typeof AttractionsRoute
   '/estimate': typeof EstimateRoute
   '/explore': typeof ExploreRoute
   '/plan': typeof PlanRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/estimate' | '/explore' | '/plan'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/attractions'
+    | '/estimate'
+    | '/explore'
+    | '/plan'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/estimate' | '/explore' | '/plan'
-  id: '__root__' | '/' | '/about' | '/estimate' | '/explore' | '/plan'
+  to: '/' | '/about' | '/attractions' | '/estimate' | '/explore' | '/plan'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/attractions'
+    | '/estimate'
+    | '/explore'
+    | '/plan'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AttractionsRoute: typeof AttractionsRoute
   EstimateRoute: typeof EstimateRoute
   ExploreRoute: typeof ExploreRoute
   PlanRoute: typeof PlanRoute
@@ -102,6 +125,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EstimateRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/attractions': {
+      id: '/attractions'
+      path: '/attractions'
+      fullPath: '/attractions'
+      preLoaderRoute: typeof AttractionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -122,6 +152,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AttractionsRoute: AttractionsRoute,
   EstimateRoute: EstimateRoute,
   ExploreRoute: ExploreRoute,
   PlanRoute: PlanRoute,

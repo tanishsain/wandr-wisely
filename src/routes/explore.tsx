@@ -1,12 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
-import { Search, MapPin, Clock, DollarSign, Lightbulb, Tag } from "lucide-react";
+import { Search, MapPin, Clock, DollarSign, Lightbulb, Tag, Building2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { DestinationCard } from "@/components/destination-card";
+import { HotelAffiliateCard } from "@/components/hotel-affiliate-card";
 import { destinations, getDestination, type Destination } from "@/data/destinations";
+import { citiesFor } from "@/data/cities";
 
 const searchSchema = z.object({
   q: fallback(z.string(), "").default(""),
@@ -153,6 +155,10 @@ function ExplorePage() {
 function DestinationDetail({ dest }: { dest: Destination }) {
   const total =
     dest.costs.stay + dest.costs.food + dest.costs.transport + dest.costs.activities;
+  const cities = citiesFor(dest.slug);
+  const cheapestNight = cities.length
+    ? Math.min(...cities.map((c) => c.hotelFromUSD))
+    : undefined;
 
   return (
     <section className="mx-auto max-w-6xl px-5 py-12">
@@ -217,6 +223,53 @@ function DestinationDetail({ dest }: { dest: Destination }) {
           </Link>
         </div>
       </div>
+
+      {/* Hotel + flight affiliate CTA */}
+      <div className="mb-14">
+        <HotelAffiliateCard city={`${dest.name}, ${dest.country}`} fromUSD={cheapestNight} />
+      </div>
+
+      {/* Cities */}
+      {cities.length > 0 && (
+        <div className="mb-14">
+          <div className="flex items-center gap-2 mb-6">
+            <Building2 className="h-5 w-5 text-primary" />
+            <h3 className="font-display text-3xl font-semibold">Cities & neighborhoods</h3>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {cities.map((c) => (
+              <div
+                key={c.slug}
+                className="p-6 rounded-3xl bg-card border border-border/60 shadow-soft hover:shadow-warm hover:-translate-y-1 transition-all"
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <h4 className="font-display text-xl font-semibold">{c.name}</h4>
+                  <div className="text-right">
+                    <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Hotels</div>
+                    <div className="font-display text-base font-semibold text-primary">
+                      ${c.hotelFromUSD}
+                      <span className="text-xs text-muted-foreground font-normal">/nt</span>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-sm text-foreground/80 mb-4">{c.hero}</p>
+                <ul className="space-y-1.5 mb-4">
+                  {c.attractions.slice(0, 3).map((a) => (
+                    <li key={a.name} className="text-xs text-foreground/75 flex items-start gap-1.5">
+                      <span className="text-primary">•</span>
+                      <span><span className="font-medium">{a.name}</span> — {a.blurb}</span>
+                    </li>
+                  ))}
+                </ul>
+                <HotelAffiliateCard
+                  city={`${c.name}, ${dest.country}`}
+                  variant="inline"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Places */}
       <div className="mb-14">
