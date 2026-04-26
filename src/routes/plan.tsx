@@ -329,6 +329,9 @@ function PlanPage() {
                 )}
               </div>
 
+              {/* Hotels & flights affiliate */}
+              <HotelAffiliateCard city={`${dest.name}, ${dest.country}`} />
+
               {/* Days */}
               <div className="space-y-4">
                 {visibleDays.map((day, i) => (
