@@ -262,6 +262,109 @@ export const citiesByDestination: Record<string, City[]> = {
       ],
     },
   ],
+  "prague-czechia": [
+    {
+      slug: "stare-mesto",
+      name: "Staré Město (Old Town)",
+      hotelFromUSD: 50,
+      hero: "Astronomical clock, gothic spires, and beer halls.",
+      attractions: [
+        { name: "Old Town Square + Astronomical Clock", type: "Landmark", blurb: "Hourly show on the hour.", free: true },
+        { name: "Charles Bridge at dawn", type: "Landmark", blurb: "Empty before 7am — magic light.", free: true },
+        { name: "U Fleků beer hall", type: "Food", blurb: "13th-century brewery.", priceUSD: 12 },
+      ],
+    },
+    {
+      slug: "mala-strana",
+      name: "Malá Strana + Castle",
+      hotelFromUSD: 60,
+      hero: "Baroque palaces under Prague Castle.",
+      attractions: [
+        { name: "Prague Castle complex", type: "Landmark", blurb: "Largest ancient castle in the world.", priceUSD: 18 },
+        { name: "John Lennon Wall", type: "Landmark", blurb: "Ever-changing graffiti tribute.", free: true },
+      ],
+    },
+  ],
+  "buenos-aires-argentina": [
+    {
+      slug: "palermo",
+      name: "Palermo",
+      hotelFromUSD: 40,
+      hero: "Tree-lined parks, parrillas, and craft cocktail bars.",
+      attractions: [
+        { name: "Bosques de Palermo", type: "Nature", blurb: "Rose garden + paddle boats.", free: true },
+        { name: "Parrilla dinner", type: "Food", blurb: "Steak + Malbec for $20.", priceUSD: 20 },
+      ],
+    },
+    {
+      slug: "san-telmo",
+      name: "San Telmo",
+      hotelFromUSD: 35,
+      hero: "Cobblestones, tango, and Sunday antique market.",
+      attractions: [
+        { name: "Feria de San Telmo (Sun)", type: "Market", blurb: "Antiques + street tango.", free: true },
+        { name: "Plaza Dorrego milonga", type: "Nightlife", blurb: "Watch locals dance under the lamps.", free: true },
+      ],
+    },
+  ],
+  "kyoto-japan": [
+    {
+      slug: "higashiyama",
+      name: "Higashiyama",
+      hotelFromUSD: 70,
+      hero: "Wooden alleys leading up to Kiyomizu-dera.",
+      attractions: [
+        { name: "Kiyomizu-dera Temple", type: "Landmark", blurb: "Hillside wooden temple with city view.", priceUSD: 4 },
+        { name: "Sannenzaka + Ninenzaka lanes", type: "Landmark", blurb: "Edo-era streets, perfect at dusk.", free: true },
+      ],
+    },
+    {
+      slug: "arashiyama",
+      name: "Arashiyama",
+      hotelFromUSD: 80,
+      hero: "Bamboo grove + monkey park on the outskirts.",
+      attractions: [
+        { name: "Arashiyama Bamboo Grove", type: "Nature", blurb: "Otherworldly green corridor.", free: true },
+        { name: "Iwatayama Monkey Park", type: "Nature", blurb: "Macaques + Kyoto skyline.", priceUSD: 6 },
+      ],
+    },
+  ],
+  "cape-town-south-africa": [
+    {
+      slug: "city-bowl",
+      name: "City Bowl",
+      hotelFromUSD: 35,
+      hero: "Under Table Mountain, between the harbor and Bo-Kaap.",
+      attractions: [
+        { name: "Table Mountain cableway", type: "Nature", blurb: "5-min ride to a 1,084m flat-top.", priceUSD: 30 },
+        { name: "Bo-Kaap colored houses", type: "Landmark", blurb: "Cape Malay quarter rainbow streets.", free: true },
+        { name: "V&A Waterfront", type: "Market", blurb: "Food market + harbor seals.", free: true },
+      ],
+    },
+    {
+      slug: "cape-peninsula",
+      name: "Cape Peninsula",
+      hotelFromUSD: 50,
+      hero: "Boulders Beach penguins + Cape of Good Hope.",
+      attractions: [
+        { name: "Boulders Beach penguin colony", type: "Nature", blurb: "African penguins up close.", priceUSD: 12 },
+        { name: "Cape Point", type: "Nature", blurb: "Dramatic clifftop where two oceans meet.", priceUSD: 22 },
+      ],
+    },
+  ],
+  "hanoi-vietnam": [
+    {
+      slug: "old-quarter-hanoi",
+      name: "Old Quarter",
+      hotelFromUSD: 18,
+      hero: "36 ancient streets — each named after its trade.",
+      attractions: [
+        { name: "Hoan Kiem Lake + Ngoc Son Temple", type: "Landmark", blurb: "Misty lake in the city center.", priceUSD: 2 },
+        { name: "Train Street", type: "Landmark", blurb: "Cafés inches from a working railway.", free: true },
+        { name: "Bún chả at Huong Lien", type: "Food", blurb: "Obama ate here for $6.", priceUSD: 6 },
+      ],
+    },
+  ],
 };
 
 export function citiesFor(destinationSlug: string): City[] {
