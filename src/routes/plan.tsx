@@ -19,6 +19,7 @@ import {
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ProPaywall } from "@/components/pro-paywall";
+import { HotelAffiliateCard } from "@/components/hotel-affiliate-card";
 import { destinations, getDestination } from "@/data/destinations";
 import { generateAIItinerary, type Style, type Interest, type AIItinerary } from "@/lib/ai-planner";
 import { usePro } from "@/hooks/use-pro";
