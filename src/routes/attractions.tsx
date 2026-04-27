@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { allCities } from "@/data/cities";
 import { getDestination } from "@/data/destinations";
 import { getYourGuideLink, bookingHotelsLink } from "@/lib/affiliate";
+import { formatInr } from "@/lib/currency";
 
 export const Route = createFileRoute("/attractions")({
   head: () => ({
@@ -120,7 +121,7 @@ function AttractionsPage() {
                     </span>
                   ) : typeof it.attraction.priceUSD === "number" ? (
                     <span className="text-[10px] px-2 py-0.5 rounded-full bg-secondary font-semibold shrink-0">
-                      ~${it.attraction.priceUSD}
+                      ~${it.attraction.priceUSD} · {formatInr(it.attraction.priceUSD)}
                     </span>
                   ) : null}
                 </div>

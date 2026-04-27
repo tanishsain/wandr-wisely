@@ -10,6 +10,7 @@ import { HotelAffiliateCard } from "@/components/hotel-affiliate-card";
 import { IndiaLiveSearch } from "@/components/india-live-search";
 import { destinations, getDestination, type Destination } from "@/data/destinations";
 import { citiesFor } from "@/data/cities";
+import { formatInr } from "@/lib/currency";
 
 const searchSchema = z.object({
   q: fallback(z.string(), "").default(""),
