@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import type { Destination } from "@/data/destinations";
+import { formatInr } from "@/lib/currency";
 
 export function DestinationCard({ dest }: { dest: Destination }) {
   const total =
@@ -37,6 +38,7 @@ export function DestinationCard({ dest }: { dest: Destination }) {
               {" "}/ day
             </span>
           </div>
+          <div className="text-xs text-muted-foreground">{formatInr(total)} / day</div>
         </div>
         <span className="text-xs px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground">
           {dest.region}
