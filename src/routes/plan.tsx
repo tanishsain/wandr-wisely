@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { formatInr } from "@/lib/currency";
 import { ProPaywall } from "@/components/pro-paywall";
 import { HotelAffiliateCard } from "@/components/hotel-affiliate-card";
 import { destinations, getDestination } from "@/data/destinations";
@@ -175,7 +176,7 @@ function PlanPage() {
 
           <label className="block mb-5">
             <span className="text-sm font-medium mb-2 block">
-              Budget (USD): <span className="text-primary font-semibold">${budget}</span>
+              Budget (USD): <span className="text-primary font-semibold">${budget}</span> <span className="text-muted-foreground">· {formatInr(budget)}</span>
             </span>
             <input
               type="range"
@@ -307,9 +308,9 @@ function PlanPage() {
                 </div>
                 <p className="opacity-90 mb-5">{itinerary.summary}</p>
                 <div className="grid grid-cols-3 gap-3 text-sm">
-                  <Stat label="Daily avg" value={`$${Math.round(itinerary.totalEstimate / days)}`} />
-                  <Stat label="Total est." value={`$${itinerary.totalEstimate}`} />
-                  <Stat label="Your budget" value={`$${budget}`} />
+                  <Stat label="Daily avg" value={`$${Math.round(itinerary.totalEstimate / days)}`} sub={formatInr(Math.round(itinerary.totalEstimate / days))} />
+                  <Stat label="Total est." value={`$${itinerary.totalEstimate}`} sub={formatInr(itinerary.totalEstimate)} />
+                  <Stat label="Your budget" value={`$${budget}`} sub={formatInr(budget)} />
                 </div>
                 <div
                   className={`mt-4 px-4 py-3 rounded-xl text-sm font-medium ${
@@ -317,8 +318,8 @@ function PlanPage() {
                   }`}
                 >
                   {onBudget
-                    ? `🎉 You're $${budget - itinerary.totalEstimate} under budget.`
-                    : `⚠️ Over budget by $${itinerary.totalEstimate - budget}. Try fewer days or backpacker style.`}
+                    ? `🎉 You're $${budget - itinerary.totalEstimate} (${formatInr(budget - itinerary.totalEstimate)}) under budget.`
+                    : `⚠️ Over budget by $${itinerary.totalEstimate - budget} (${formatInr(itinerary.totalEstimate - budget)}). Try fewer days or backpacker style.`}
                 </div>
                 {isPro && (
                   <button
@@ -416,11 +417,12 @@ function PlanPage() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
     <div className="rounded-xl bg-card/15 backdrop-blur p-3">
       <div className="opacity-80">{label}</div>
       <div className="font-display text-2xl font-semibold">{value}</div>
+      {sub && <div className="text-xs opacity-80">{sub}</div>}
     </div>
   );
 }
@@ -449,6 +451,7 @@ function DayCard({
         <div className="ml-auto text-right">
           <div className="text-xs text-muted-foreground">Est. spend</div>
           <div className="font-semibold">${day.estimatedSpend}</div>
+          <div className="text-[10px] text-muted-foreground">{formatInr(day.estimatedSpend)}</div>
         </div>
       </div>
 
