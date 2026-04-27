@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { DestinationCard } from "@/components/destination-card";
 import { HotelAffiliateCard } from "@/components/hotel-affiliate-card";
+import { IndiaLiveSearch } from "@/components/india-live-search";
 import { destinations, getDestination, type Destination } from "@/data/destinations";
 import { citiesFor } from "@/data/cities";
 
