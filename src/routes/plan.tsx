@@ -417,11 +417,12 @@ function PlanPage() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
     <div className="rounded-xl bg-card/15 backdrop-blur p-3">
       <div className="opacity-80">{label}</div>
       <div className="font-display text-2xl font-semibold">{value}</div>
+      {sub && <div className="text-xs opacity-80">{sub}</div>}
     </div>
   );
 }
