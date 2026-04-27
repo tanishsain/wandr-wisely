@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { DestinationCard } from "@/components/destination-card";
 import { HotelAffiliateCard } from "@/components/hotel-affiliate-card";
+import { IndiaLiveSearch } from "@/components/india-live-search";
 import { destinations, getDestination, type Destination } from "@/data/destinations";
 import { citiesFor } from "@/data/cities";
 
@@ -120,9 +121,10 @@ function ExplorePage() {
       {selected ? (
         <DestinationDetail dest={selected} />
       ) : (
-        <section className="mx-auto max-w-6xl px-5 py-12">
-          <p className="text-sm text-muted-foreground mb-6">
-            {q ? `${filtered.length} matching destination${filtered.length === 1 ? "" : "s"}` : `Browsing all ${filtered.length} destinations`}
+        <section className="mx-auto max-w-6xl px-5 py-12 space-y-12">
+          <IndiaLiveSearch initialQuery={q} />
+          <p className="text-sm text-muted-foreground">
+            {q ? `${filtered.length} matching curated destination${filtered.length === 1 ? "" : "s"}` : `Browsing all ${filtered.length} curated destinations`}
           </p>
           {filtered.length === 0 ? (
             <div className="text-center py-20">

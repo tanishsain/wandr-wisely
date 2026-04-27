@@ -1457,6 +1457,35 @@ export const destinations: Destination[] = [
       "Cover shoulders + knees to enter temples.",
     ],
   },
+  {
+    slug: "rajasthan-india",
+    name: "Rajasthan",
+    country: "India",
+    region: "Asia",
+    emoji: "🐫",
+    tagline: "Forts, palaces, and the Thar desert — India's most regal state.",
+    bestTime: "October – March (cool & dry)",
+    currency: "INR",
+    costs: { stay: 10, food: 5, transport: 4, activities: 6 },
+    places: [
+      { name: "Amber Fort, Jaipur", category: "Landmark", why: "Hilltop sandstone fort with mirror-work palaces." },
+      { name: "Mehrangarh Fort, Jodhpur", category: "Landmark", why: "Cliffside fortress over the Blue City." },
+      { name: "Jaisalmer Golden Fort", category: "Landmark", why: "Living fort of yellow sandstone in the Thar desert." },
+      { name: "Sam Sand Dunes camel safari", category: "Adventure", why: "Sunset camel ride + desert camp under the stars." },
+      { name: "Lake Pichola, Udaipur", category: "Nature", why: "Boat ride past floating marble palaces." },
+      { name: "Hawa Mahal, Jaipur", category: "Landmark", why: "953 latticed windows on a pink honeycomb façade.", free: true },
+      { name: "Junagarh Fort, Bikaner", category: "Culture", why: "Unconquered fort with opulent painted halls." },
+      { name: "Pushkar Lake & Brahma Temple", category: "Culture", why: "Sacred lake with one of the world's only Brahma temples.", free: true },
+      { name: "Dal Bati Churma", category: "Food", why: "Iconic Rajasthani thali — wheat balls in ghee with lentils." },
+    ],
+    tips: [
+      "Take overnight sleeper trains between cities — cheap and scenic.",
+      "Hire a local guide at forts (~₹300) — the stories make it worth it.",
+      "Bargain everywhere except fixed-price govt emporiums.",
+      "Cover head + remove shoes at temples; carry a scarf.",
+      "October–February is peak; book Pushkar Camel Fair months ahead.",
+    ],
+  },
 ];
 
 export const getDestination = (slug: string) =>
