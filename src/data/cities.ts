@@ -440,8 +440,8 @@ export const citiesByDestination: Record<string, City[]> = {
       attractions: [
         { name: "Anupgarh Fort", type: "Landmark", blurb: "Crumbling 17th-c. fort an hour west.", free: true },
         { name: "Hindumalkot border", type: "Landmark", blurb: "India–Pakistan border post — permit needed.", free: true },
-        { name: "Laila-Majnu Mazaar (Anupgarh)", type: "Culture", blurb: "Folk pilgrimage shrine of the legendary lovers.", free: true },
-        { name: "Gurudwara Buddha Johad", type: "Culture", blurb: "Historic Sikh shrine in Rawatsar nearby.", free: true },
+        { name: "Laila-Majnu Mazaar (Anupgarh)", type: "Landmark", blurb: "Folk pilgrimage shrine of the legendary lovers.", free: true },
+        { name: "Gurudwara Buddha Johad", type: "Landmark", blurb: "Historic Sikh shrine in Rawatsar nearby.", free: true },
         { name: "Kinnow orchards (winter)", type: "Nature", blurb: "Citrus groves stretching to the horizon Dec–Feb.", free: true },
         { name: "Local kulfi & chaat at Bhagat Singh Chowk", type: "Food", blurb: "Cheap, famous street eats.", priceUSD: 2 },
       ],
