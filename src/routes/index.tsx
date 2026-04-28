@@ -10,9 +10,27 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Wandr — Discover places, travel on a budget" },
-      { name: "description", content: "Find famous places to visit and plan trips that fit your budget. Curated destinations across 6 continents." },
+      { name: "description", content: "Find famous places to visit and plan trips that fit your budget. Curated destinations across 6 continents with real cost breakdowns." },
       { property: "og:title", content: "Wandr — Discover places, travel on a budget" },
       { property: "og:description", content: "Find famous places to visit and plan trips that fit your budget." },
+    ],
+    links: [{ rel: "canonical", href: "https://wandr-wisely.lovable.app/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Wandr",
+          url: "https://wandr-wisely.lovable.app",
+          description: "Discover famous places and plan trips on a budget.",
+          potentialAction: {
+            "@type": "SearchAction",
+            target: "https://wandr-wisely.lovable.app/explore?q={search_term_string}",
+            "query-input": "required name=search_term_string",
+          },
+        }),
+      },
     ],
   }),
   component: HomePage,
