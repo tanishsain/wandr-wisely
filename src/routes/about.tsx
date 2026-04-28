@@ -11,6 +11,7 @@ export const Route = createFileRoute("/about")({
       { property: "og:title", content: "About Wandr — travel further on less" },
       { property: "og:description", content: "A friendly travel companion for curious travelers on a tight budget." },
     ],
+    links: [{ rel: "canonical", href: "https://wandr-wisely.lovable.app/about" }],
   }),
   component: AboutPage,
 });
