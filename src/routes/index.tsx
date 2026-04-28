@@ -114,12 +114,40 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Trust strip / Statistics */}
+      <section className="border-y border-border/60 bg-card">
+        <div className="mx-auto max-w-6xl px-5 py-10 grid grid-cols-2 md:grid-cols-4 gap-6">
+          {[
+            { icon: Globe2, value: "25+", label: "Curated destinations" },
+            { icon: Users, value: "12,000+", label: "Trips planned" },
+            { icon: Star, value: "4.9/5", label: "Traveler rating" },
+            { icon: Shield, value: "100%", label: "Free to use" },
+          ].map((s) => (
+            <div key={s.label} className="flex items-center gap-3">
+              <div className="h-11 w-11 rounded-2xl bg-secondary grid place-items-center shrink-0">
+                <s.icon className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <div className="font-display text-2xl font-semibold leading-none">{s.value}</div>
+                <div className="text-xs text-muted-foreground mt-1">{s.label}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* How it works */}
       <section className="mx-auto max-w-6xl px-5 py-20">
         <div className="text-center mb-14">
+          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-primary mb-3">How it works</span>
           <h2 className="font-display text-4xl md:text-5xl font-semibold mb-4">
             Three steps. Zero stress.
           </h2>
+          <p className="text-muted-foreground max-w-xl mx-auto">
+            Whether you're dreaming, planning, or counting coins, Wandr
+            makes it simple.
+          </p>
+        </div>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Whether you're dreaming, planning, or counting coins, Wandr
             makes it simple.
