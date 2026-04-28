@@ -224,6 +224,115 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Popular Rajasthan destinations */}
+      <section className="mx-auto max-w-6xl px-5 py-20">
+        <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
+          <div>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-primary mb-3">India spotlight</span>
+            <h2 className="font-display text-4xl md:text-5xl font-semibold mb-2">
+              Popular Rajasthan destinations
+            </h2>
+            <p className="text-muted-foreground max-w-xl">
+              Forts, palaces and dunes — the land of kings on a backpacker budget.
+            </p>
+          </div>
+          <Link
+            to="/explore"
+            search={{ q: "rajasthan" }}
+            className="text-primary font-medium flex items-center gap-1 hover:gap-2 transition-all"
+          >
+            Explore Rajasthan <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {[
+            { slug: "jaipur", name: "Jaipur", emoji: "🏰", tag: "Pink City", blurb: "Amber Fort, Hawa Mahal and bustling bazaars." },
+            { slug: "jodhpur", name: "Jodhpur", emoji: "🔵", tag: "Blue City", blurb: "Mehrangarh Fort towering over indigo lanes." },
+            { slug: "jaisalmer", name: "Jaisalmer", emoji: "🐪", tag: "Golden City", blurb: "Sandstone fort and Sam dune camel safaris." },
+            { slug: "udaipur", name: "Udaipur", emoji: "🛶", tag: "City of Lakes", blurb: "Lake Pichola palaces and rooftop sunsets." },
+            { slug: "bikaner", name: "Bikaner", emoji: "🕌", tag: "Camel Country", blurb: "Junagarh Fort, sweets, and desert culture." },
+            { slug: "pushkar", name: "Pushkar", emoji: "🪔", tag: "Holy Town", blurb: "Sacred lake, ghats and the famous camel fair." },
+          ].map((c) => (
+            <Link
+              key={c.slug}
+              to="/explore"
+              search={{ q: c.slug }}
+              className="group p-6 rounded-3xl bg-card border border-border/60 shadow-soft hover:shadow-warm hover:-translate-y-1 transition-all"
+            >
+              <div className="flex items-start justify-between mb-3">
+                <span className="text-4xl" aria-hidden>{c.emoji}</span>
+                <span className="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground font-semibold">
+                  {c.tag}
+                </span>
+              </div>
+              <h3 className="font-display text-2xl font-semibold mb-1 flex items-center gap-2">
+                {c.name}
+                <MapPin className="h-4 w-4 text-muted-foreground" />
+              </h3>
+              <p className="text-sm text-muted-foreground">{c.blurb}</p>
+              <div className="mt-4 text-primary text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                See guide <ArrowRight className="h-4 w-4" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="bg-warm/40 border-y border-border/60">
+        <div className="mx-auto max-w-6xl px-5 py-20">
+          <div className="text-center mb-12">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-primary mb-3">Loved by travelers</span>
+            <h2 className="font-display text-4xl md:text-5xl font-semibold mb-3">
+              What our travelers say
+            </h2>
+            <div className="flex items-center justify-center gap-1 text-primary">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-5 w-5 fill-current" />
+              ))}
+              <span className="ml-2 text-sm text-muted-foreground">4.9 average from 2,400+ reviews</span>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              { name: "Priya Sharma", trip: "Rajasthan · 10 days", quote: "Wandr's cost estimator was spot on. We did Jaipur, Jodhpur and Jaisalmer well under budget and the AI itinerary saved hours of planning." },
+              { name: "Marco Rivera", trip: "Bali · 2 weeks", quote: "Honest tips, no spammy affiliate clutter. The hidden gems in Ubud were exactly what I was hoping to find." },
+              { name: "Aiko Tanaka", trip: "Lisbon · weekend", quote: "Loved the curated highlights — felt like advice from a well-traveled friend, not a generic listicle." },
+            ].map((t) => (
+              <figure key={t.name} className="p-7 rounded-3xl bg-card border border-border/60 shadow-soft flex flex-col">
+                <Quote className="h-6 w-6 text-primary/40 mb-3" />
+                <blockquote className="text-foreground/90 mb-5 flex-1">"{t.quote}"</blockquote>
+                <div className="flex items-center gap-1 text-primary mb-2" aria-label="5 star rating">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-current" />
+                  ))}
+                </div>
+                <figcaption>
+                  <div className="font-semibold">{t.name}</div>
+                  <div className="text-xs text-muted-foreground">{t.trip}</div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3">
+            {[
+              { icon: Shield, label: "Secure by design" },
+              { icon: CheckCircle2, label: "No hidden fees" },
+              { icon: Award, label: "Editor-curated" },
+              { icon: Globe2, label: "Worldwide coverage" },
+            ].map((b) => (
+              <div key={b.label} className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-card border border-border/60 text-sm font-medium">
+                <b.icon className="h-4 w-4 text-primary shrink-0" />
+                {b.label}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="mx-auto max-w-4xl px-5 py-20">
         <div className="relative rounded-3xl bg-sunset p-10 md:p-16 text-center text-primary-foreground overflow-hidden shadow-warm">
