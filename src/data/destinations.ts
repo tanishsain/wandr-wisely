@@ -1486,8 +1486,8 @@ export const destinations: Destination[] = [
       "October–February is peak; book Pushkar Camel Fair months ahead.",
     ],
   },
-  ...indianStates,
 ];
+
 
 // All 28 Indian states (Rajasthan already above). Region: Asia, currency INR.
 const mkState = (
@@ -1846,6 +1846,8 @@ const indianStates: Destination[] = [
     ["Tiger Hill sunrise needs a 4am start from Darjeeling.", "Sundarbans best Nov–Feb — book a 2-day boat tour."],
   ),
 ];
+
+destinations.push(...indianStates);
 
 export const getDestination = (slug: string) =>
   destinations.find((d) => d.slug === slug);
