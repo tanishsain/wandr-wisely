@@ -1,5 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Search, Compass, Wallet, Sparkles, ArrowRight } from "lucide-react";
+import {
+  Search, Compass, Wallet, Sparkles, ArrowRight,
+  Star, Shield, Globe2, Users, Award, CheckCircle2, Quote, MapPin,
+} from "lucide-react";
 import { useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
