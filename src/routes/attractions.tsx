@@ -23,6 +23,7 @@ export const Route = createFileRoute("/attractions")({
         content: "Iconic landmarks, museums, and food spots across 30+ cities.",
       },
     ],
+    links: [{ rel: "canonical", href: "https://wandr-wisely.lovable.app/attractions" }],
   }),
   component: AttractionsPage,
 });

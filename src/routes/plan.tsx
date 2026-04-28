@@ -45,6 +45,7 @@ export const Route = createFileRoute("/plan")({
         content: "Generate a day-by-day AI itinerary tuned to your style and budget.",
       },
     ],
+    links: [{ rel: "canonical", href: "https://wandr-wisely.lovable.app/plan" }],
   }),
   component: PlanPage,
 });

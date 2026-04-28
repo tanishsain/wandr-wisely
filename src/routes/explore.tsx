@@ -25,6 +25,7 @@ export const Route = createFileRoute("/explore")({
       { property: "og:title", content: "Explore destinations · Wandr" },
       { property: "og:description", content: "Browse hand-picked destinations across the world." },
     ],
+    links: [{ rel: "canonical", href: "https://wandr-wisely.lovable.app/explore" }],
   }),
   component: ExplorePage,
 });

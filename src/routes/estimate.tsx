@@ -14,6 +14,7 @@ export const Route = createFileRoute("/estimate")({
       { property: "og:title", content: "Trip cost estimator · Wandr" },
       { property: "og:description", content: "See exactly what your trip will cost — and how to spend less." },
     ],
+    links: [{ rel: "canonical", href: "https://wandr-wisely.lovable.app/estimate" }],
   }),
   component: EstimatePage,
 });
