@@ -148,11 +148,6 @@ function HomePage() {
             makes it simple.
           </p>
         </div>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Whether you're dreaming, planning, or counting coins, Wandr
-            makes it simple.
-          </p>
-        </div>
 
         <div className="grid md:grid-cols-3 gap-6">
           {[
