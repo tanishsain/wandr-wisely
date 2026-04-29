@@ -193,3 +193,41 @@
   .shadow-glow { box-shadow: var(--shadow-glow); }
   .text-balance { text-wrap: balance; }
 }
+
+/* Voice search — concentric ripple rings */
+@keyframes voice-ring {
+  0%   { transform: scale(0.6); opacity: 0.7; }
+  80%  { opacity: 0.05; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes voice-bar {
+  0%, 100% { transform: scaleY(0.35); }
+  50%      { transform: scaleY(1); }
+}
+@keyframes voice-glow {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--destructive) 55%, transparent),
+                          0 8px 24px -6px color-mix(in oklab, var(--destructive) 45%, transparent); }
+  50%      { box-shadow: 0 0 0 8px color-mix(in oklab, var(--destructive) 0%, transparent),
+                          0 12px 30px -6px color-mix(in oklab, var(--destructive) 60%, transparent); }
+}
+.voice-ring {
+  position: absolute; inset: 0; border-radius: 9999px;
+  border: 2px solid color-mix(in oklab, var(--destructive) 60%, transparent);
+  animation: voice-ring 1.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  pointer-events: none;
+}
+.voice-ring-2 { animation-delay: 0.5s; }
+.voice-ring-3 { animation-delay: 1s; }
+.voice-glow { animation: voice-glow 1.8s ease-in-out infinite; }
+.voice-bar {
+  display: inline-block; width: 3px; border-radius: 2px;
+  background: currentColor;
+  transform-origin: center;
+  animation: voice-bar 0.9s ease-in-out infinite;
+}
+.voice-bar:nth-child(1) { height: 10px; animation-delay: 0s; }
+.voice-bar:nth-child(2) { height: 16px; animation-delay: 0.12s; }
+.voice-bar:nth-child(3) { height: 22px; animation-delay: 0.24s; }
+.voice-bar:nth-child(4) { height: 16px; animation-delay: 0.36s; }
+.voice-bar:nth-child(5) { height: 10px; animation-delay: 0.48s; }
+
