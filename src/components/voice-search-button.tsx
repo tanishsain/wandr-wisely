@@ -197,52 +197,80 @@ export function VoiceSearchButton({ onResult, disabled }: Props) {
         aria-pressed={listening}
         aria-label={listening ? "Stop listening" : "Start voice search"}
         title={`Voice search (${lang}) — click to ${listening ? "stop" : "speak"}`}
-        className={`relative px-4 py-3 rounded-full inline-flex items-center gap-2 transition-colors ${
+        className={`relative h-12 px-4 rounded-full inline-flex items-center justify-center gap-2 transition-all duration-300 active:scale-95 ${
           listening
-            ? "bg-destructive text-destructive-foreground"
-            : "bg-secondary text-foreground hover:bg-secondary/80"
-        } disabled:opacity-60`}
+            ? "bg-destructive text-destructive-foreground voice-glow scale-105"
+            : "bg-gradient-to-br from-primary to-primary-glow text-primary-foreground shadow-warm hover:shadow-glow hover:-translate-y-0.5"
+        } disabled:opacity-60 disabled:hover:translate-y-0`}
       >
         {listening && (
           <>
-            <span className="absolute inset-0 rounded-full bg-destructive/40 animate-ping" />
-            <span className="absolute inset-0 rounded-full ring-2 ring-destructive/60 animate-pulse" />
+            <span className="voice-ring" />
+            <span className="voice-ring voice-ring-2" />
+            <span className="voice-ring voice-ring-3" />
           </>
         )}
         {state === "processing" ? (
-          <Loader2 className="h-4 w-4 animate-spin relative" />
+          <Loader2 className="h-5 w-5 animate-spin relative" />
         ) : (
-          <Mic className={`h-4 w-4 relative ${listening ? "animate-pulse" : ""}`} />
+          <Mic className={`h-5 w-5 relative transition-transform ${listening ? "scale-110" : ""}`} />
         )}
         <span
           onClick={cycleLang}
-          className="relative text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-background/30 hover:bg-background/50"
+          role="button"
+          tabIndex={0}
+          className="relative text-[10px] font-bold tracking-wider px-2 py-0.5 rounded-full bg-background/25 hover:bg-background/40 backdrop-blur-sm transition-colors"
         >
           {LANG_LABEL[lang]}
         </span>
       </button>
 
       {(listening || transcript || errorMsg) && (
-        <div className="absolute z-30 right-0 mt-2 w-72 rounded-2xl border border-border bg-card shadow-warm p-3 text-sm animate-fade-in">
+        <div className="absolute z-30 right-0 mt-3 w-80 rounded-2xl border border-border/60 bg-card/95 backdrop-blur-xl shadow-warm p-4 text-sm animate-fade-in">
           {listening && (
-            <div className="flex items-center gap-2 text-destructive font-medium mb-1">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-destructive opacity-75 animate-ping" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-destructive" />
-              </span>
-              Listening… ({lang})
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2 text-destructive font-semibold">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-destructive opacity-75 animate-ping" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-destructive" />
+                </span>
+                Listening…
+              </div>
+              <div className="flex items-end gap-1 h-6 text-destructive">
+                <span className="voice-bar" />
+                <span className="voice-bar" />
+                <span className="voice-bar" />
+                <span className="voice-bar" />
+                <span className="voice-bar" />
+              </div>
             </div>
           )}
           {transcript && (
-            <p className="text-foreground/80">
-              <span className="text-muted-foreground text-xs">Heard:</span> "{transcript}"
+            <p className="text-foreground/90 leading-relaxed">
+              <span className="text-muted-foreground text-xs uppercase tracking-wider mr-1">
+                Heard
+              </span>
+              <span className="font-medium">"{transcript}"</span>
             </p>
           )}
-          {errorMsg && <p className="text-destructive text-xs mt-1">{errorMsg}</p>}
-          {!errorMsg && (
-            <p className="text-[11px] text-muted-foreground mt-1">
-              Try: "Show me places in Jaipur", "Hotels in Jodhpur", "Plan a trip to Jaisalmer"
+          {errorMsg && (
+            <p className="text-destructive text-xs mt-2 flex items-start gap-1.5">
+              <span aria-hidden>⚠</span>
+              <span>{errorMsg}</span>
             </p>
+          )}
+          {!errorMsg && !transcript && listening && (
+            <p className="text-[11px] text-muted-foreground mt-2 leading-relaxed">
+              Try: <span className="text-foreground/70">"Show me places in Jaipur"</span>,{" "}
+              <span className="text-foreground/70">"Hotels in Jodhpur"</span>,{" "}
+              <span className="text-foreground/70">"Plan a trip to Jaisalmer"</span>
+            </p>
+          )}
+          {listening && (
+            <div className="mt-3 pt-2 border-t border-border/40 flex items-center justify-between text-[10px] text-muted-foreground">
+              <span>Language: <span className="font-semibold text-foreground/80">{lang}</span></span>
+              <span>Tap mic to stop</span>
+            </div>
           )}
         </div>
       )}
