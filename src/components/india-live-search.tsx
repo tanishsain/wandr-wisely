@@ -183,7 +183,7 @@ export function IndiaLiveSearch({ initialQuery = "" }: { initialQuery?: string }
               autoComplete="off"
             />
           </div>
-          {showSuggest && suggestions.length > 0 && state_placeholder_unused()}
+          
           {showSuggest && suggestions.length > 0 && (
             <ul className="absolute z-20 left-0 right-0 mt-2 rounded-2xl border border-border bg-card shadow-warm overflow-hidden">
               {suggestions.map((s) => (
@@ -204,6 +204,10 @@ export function IndiaLiveSearch({ initialQuery = "" }: { initialQuery?: string }
             </ul>
           )}
         </div>
+        <VoiceSearchButton
+          onResult={(loc) => runSearch(loc)}
+          disabled={live.status === "loading"}
+        />
         <button
           type="submit"
           disabled={live.status === "loading"}
