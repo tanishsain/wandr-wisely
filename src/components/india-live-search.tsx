@@ -5,6 +5,7 @@ import { MapPin, Sparkles, Loader2, Star, Search, ArrowRight, Tag, Globe2 } from
 import { searchIndianCity, type OTMCityResult } from "@/lib/opentripmap.functions";
 import { searchIndiaPlaces, type IndiaSearchResult } from "@/lib/india-search.functions";
 import { HotelAffiliateCard } from "@/components/hotel-affiliate-card";
+import { VoiceSearchButton } from "@/components/voice-search-button";
 import { destinations, type Destination, type Place } from "@/data/destinations";
 import { citiesByDestination, type City } from "@/data/cities";
 import { aliasSuggestions, fuzzyScore, normalize, resolveAlias } from "@/lib/fuzzy";
@@ -182,6 +183,7 @@ export function IndiaLiveSearch({ initialQuery = "" }: { initialQuery?: string }
               autoComplete="off"
             />
           </div>
+          {showSuggest && suggestions.length > 0 && state_placeholder_unused()}
           {showSuggest && suggestions.length > 0 && (
             <ul className="absolute z-20 left-0 right-0 mt-2 rounded-2xl border border-border bg-card shadow-warm overflow-hidden">
               {suggestions.map((s) => (
