@@ -1,11 +1,13 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { MapPin, Sparkles, Loader2, Star, Search, ArrowRight, Tag } from "lucide-react";
+import { MapPin, Sparkles, Loader2, Star, Search, ArrowRight, Tag, Globe2 } from "lucide-react";
 import { searchIndianCity, type OTMCityResult } from "@/lib/opentripmap.functions";
+import { searchIndiaPlaces, type IndiaSearchResult } from "@/lib/india-search.functions";
 import { HotelAffiliateCard } from "@/components/hotel-affiliate-card";
 import { destinations, type Destination, type Place } from "@/data/destinations";
 import { citiesByDestination, type City } from "@/data/cities";
+import { aliasSuggestions, fuzzyScore, normalize, resolveAlias } from "@/lib/fuzzy";
 
 type LocalMatch = {
   destination: Destination;
@@ -18,113 +20,187 @@ type LiveState =
   | { status: "idle" }
   | { status: "loading" }
   | { status: "error"; message: string }
-  | { status: "ok"; data: OTMCityResult };
+  | { status: "ok"; otm?: OTMCityResult; nominatim: IndiaSearchResult["places"] };
 
 const indianDestinations = destinations.filter((d) => d.country === "India");
 
-function scoreMatch(query: string, dest: Destination): LocalMatch | null {
-  const q = query.toLowerCase().trim();
+function fuzzyMatch(query: string, dest: Destination): LocalMatch | null {
+  const q = query.trim();
   if (!q) return null;
 
   let score = 0;
-  const inName = dest.name.toLowerCase().includes(q);
-  const inSlug = dest.slug.toLowerCase().includes(q);
-  if (dest.name.toLowerCase() === q) score += 100;
-  else if (inName) score += 50;
-  if (inSlug) score += 20;
+  score += fuzzyScore(q, dest.name) * 100;
+  score += fuzzyScore(q, dest.slug) * 40;
 
   const cities = citiesByDestination[dest.slug] ?? [];
-  const matchedCities = cities.filter(
-    (c) => c.name.toLowerCase().includes(q) || c.slug.toLowerCase().includes(q),
-  );
-  if (matchedCities.length) score += 40 + matchedCities.length * 5;
+  const matchedCities = cities
+    .map((c) => ({ c, s: Math.max(fuzzyScore(q, c.name), fuzzyScore(q, c.slug)) }))
+    .filter((x) => x.s >= 0.6)
+    .sort((a, b) => b.s - a.s)
+    .map((x) => x.c);
+  if (matchedCities.length) score += 50 + matchedCities.length * 5;
 
-  const matchedPlaces = dest.places.filter((p) =>
-    p.name.toLowerCase().includes(q),
-  );
+  const matchedPlaces = dest.places
+    .map((p) => ({ p, s: fuzzyScore(q, p.name) }))
+    .filter((x) => x.s >= 0.65)
+    .sort((a, b) => b.s - a.s)
+    .map((x) => x.p);
   if (matchedPlaces.length) score += 25 + matchedPlaces.length * 3;
 
-  if (dest.tagline.toLowerCase().includes(q)) score += 5;
+  if (fuzzyScore(q, dest.tagline) > 0.5) score += 5;
 
-  if (score === 0) return null;
+  if (score < 25) return null;
   return { destination: dest, matchedCities, matchedPlaces, score };
+}
+
+function buildSuggestions(prefix: string, limit = 8): string[] {
+  const q = prefix.trim();
+  if (!q) return [];
+  const out = new Map<string, number>();
+  // Alias-driven suggestions first
+  for (const s of aliasSuggestions(q, limit)) out.set(s, 1);
+
+  const np = normalize(q);
+  for (const d of indianDestinations) {
+    if (normalize(d.name).startsWith(np)) out.set(d.name, (out.get(d.name) ?? 0) + 0.9);
+    const cities = citiesByDestination[d.slug] ?? [];
+    for (const c of cities) {
+      if (normalize(c.name).startsWith(np)) out.set(c.name, (out.get(c.name) ?? 0) + 0.8);
+      else if (normalize(c.name).includes(np) && np.length >= 3)
+        out.set(c.name, (out.get(c.name) ?? 0) + 0.5);
+    }
+  }
+  return [...out.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit)
+    .map(([s]) => s);
 }
 
 export function IndiaLiveSearch({ initialQuery = "" }: { initialQuery?: string }) {
   const [query, setQuery] = useState(initialQuery);
   const [submitted, setSubmitted] = useState(initialQuery.trim());
   const [live, setLive] = useState<LiveState>({ status: "idle" });
-  const search = useServerFn(searchIndianCity);
+  const [showSuggest, setShowSuggest] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const otmSearch = useServerFn(searchIndianCity);
+  const nominatimSearch = useServerFn(searchIndiaPlaces);
+
+  const suggestions = useMemo(() => buildSuggestions(query), [query]);
 
   const localResults = useMemo<LocalMatch[]>(() => {
     if (!submitted) return [];
+    const resolved = resolveAlias(submitted);
     return indianDestinations
-      .map((d) => scoreMatch(submitted, d))
+      .map((d) => fuzzyMatch(resolved, d))
       .filter((m): m is LocalMatch => m !== null)
       .sort((a, b) => b.score - a.score)
       .slice(0, 8);
   }, [submitted]);
 
-  async function handleSearch(e: React.FormEvent) {
-    e.preventDefault();
-    const q = query.trim();
+  async function runSearch(rawQuery: string) {
+    const q = rawQuery.trim();
     if (!q) return;
-    setSubmitted(q);
+    const resolved = resolveAlias(q);
+    setSubmitted(resolved);
+    setQuery(resolved);
+    setShowSuggest(false);
     setLive({ status: "loading" });
-    try {
-      const result = await search({ data: { query: q } });
-      if ("error" in result) {
-        setLive({ status: "error", message: result.error });
-      } else {
-        setLive({ status: "ok", data: result });
-      }
-    } catch (err) {
+
+    const [otmRes, nomRes] = await Promise.allSettled([
+      otmSearch({ data: { query: resolved } }),
+      nominatimSearch({ data: { query: resolved } }),
+    ]);
+
+    const otm =
+      otmRes.status === "fulfilled" && !("error" in otmRes.value) ? otmRes.value : undefined;
+    const nominatim =
+      nomRes.status === "fulfilled" ? nomRes.value.places : [];
+
+    if (!otm && nominatim.length === 0) {
       setLive({
         status: "error",
-        message: err instanceof Error ? err.message : "Live enrichment unavailable",
+        message: "Live search is offline — showing curated results only.",
       });
+      return;
     }
+    setLive({ status: "ok", otm, nominatim });
   }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    runSearch(query);
+  }
+
+  // Close suggestions on outside click
+  useEffect(() => {
+    function onDoc(e: MouseEvent) {
+      if (!inputRef.current?.parentElement?.contains(e.target as Node)) {
+        setShowSuggest(false);
+      }
+    }
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, []);
 
   return (
     <div className="rounded-3xl bg-card border border-border/60 p-6 md:p-8 shadow-soft">
       <div className="flex items-center gap-2 mb-4">
         <Sparkles className="h-5 w-5 text-primary" />
-        <h3 className="font-display text-2xl font-semibold">Search India — states, cities & towns</h3>
+        <h3 className="font-display text-2xl font-semibold">Search India — states, cities, towns & villages</h3>
       </div>
       <p className="text-sm text-muted-foreground mb-5">
-        All 28 Indian states + popular cities indexed. Try{" "}
-        <button
-          type="button"
-          onClick={() => { setQuery("Kerala"); setSubmitted("Kerala"); }}
-          className="text-primary hover:underline"
-        >Kerala</button>,{" "}
-        <button
-          type="button"
-          onClick={() => { setQuery("Jaipur"); setSubmitted("Jaipur"); }}
-          className="text-primary hover:underline"
-        >Jaipur</button>,{" "}
-        <button
-          type="button"
-          onClick={() => { setQuery("Sri Ganganagar"); setSubmitted("Sri Ganganagar"); }}
-          className="text-primary hover:underline"
-        >Sri Ganganagar</button>, or{" "}
-        <button
-          type="button"
-          onClick={() => { setQuery("Hampi"); setSubmitted("Hampi"); }}
-          className="text-primary hover:underline"
-        >Hampi</button>.
+        Powered by OpenStreetMap + OpenTripMap. Works with typos, partial names, and Hindi. Try{" "}
+        {["Sri Ganganagar", "जयपुर", "jodpur", "Hanumangarh", "Hampi"].map((t, i) => (
+          <span key={t}>
+            <button
+              type="button"
+              onClick={() => runSearch(t)}
+              className="text-primary hover:underline"
+            >
+              {t}
+            </button>
+            {i < 4 ? ", " : "."}
+          </span>
+        ))}
       </p>
 
-      <form onSubmit={handleSearch} className="flex gap-2 mb-6">
-        <div className="flex-1 flex items-center gap-2 px-4 rounded-full border border-border bg-background focus-within:ring-2 focus-within:ring-primary/40">
-          <Search className="h-4 w-4 text-muted-foreground shrink-0" />
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Type any Indian state, city, or town"
-            className="flex-1 py-3 bg-transparent outline-none"
-          />
+      <form onSubmit={handleSubmit} className="flex gap-2 mb-6">
+        <div className="relative flex-1">
+          <div className="flex items-center gap-2 px-4 rounded-full border border-border bg-background focus-within:ring-2 focus-within:ring-primary/40">
+            <Search className="h-4 w-4 text-muted-foreground shrink-0" />
+            <input
+              ref={inputRef}
+              value={query}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setShowSuggest(true);
+              }}
+              onFocus={() => setShowSuggest(true)}
+              placeholder="Type any Indian state, city, town or village (English or हिंदी)"
+              className="flex-1 py-3 bg-transparent outline-none"
+              autoComplete="off"
+            />
+          </div>
+          {showSuggest && suggestions.length > 0 && (
+            <ul className="absolute z-20 left-0 right-0 mt-2 rounded-2xl border border-border bg-card shadow-warm overflow-hidden">
+              {suggestions.map((s) => (
+                <li key={s}>
+                  <button
+                    type="button"
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      runSearch(s);
+                    }}
+                    className="w-full text-left px-4 py-2.5 text-sm hover:bg-secondary/60 flex items-center gap-2"
+                  >
+                    <MapPin className="h-3.5 w-3.5 text-primary" />
+                    {s}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
         <button
           type="submit"
@@ -143,16 +219,15 @@ export function IndiaLiveSearch({ initialQuery = "" }: { initialQuery?: string }
 
       {!submitted && (
         <p className="text-sm text-muted-foreground">
-          Start typing to search across all Indian destinations.
+          Start typing to search across every Indian destination — even small towns.
         </p>
       )}
 
-      {submitted && localResults.length === 0 && live.status !== "ok" && (
+      {submitted && localResults.length === 0 && live.status !== "ok" && live.status !== "loading" && (
         <div className="rounded-2xl bg-secondary/40 p-5 text-sm">
           <p className="font-medium mb-1">No curated match for “{submitted}”.</p>
           <p className="text-muted-foreground">
-            Try a state name (e.g. Kerala, Goa, Punjab) or a famous city
-            (Jaipur, Varanasi, Munnar).
+            We're checking OpenStreetMap for towns and villages too…
           </p>
         </div>
       )}
@@ -170,12 +245,13 @@ export function IndiaLiveSearch({ initialQuery = "" }: { initialQuery?: string }
         </div>
       )}
 
-      {live.status === "ok" && <LiveResults data={live.data} />}
+      {live.status === "ok" && live.otm && <LiveResults data={live.otm} />}
+      {live.status === "ok" && live.nominatim.length > 0 && (
+        <NominatimResults places={live.nominatim} />
+      )}
 
-      {live.status === "error" && localResults.length === 0 && (
-        <p className="text-xs text-muted-foreground mt-4">
-          Live enrichment is offline right now — showing curated results only.
-        </p>
+      {live.status === "error" && (
+        <p className="text-xs text-muted-foreground mt-4">{live.message}</p>
       )}
     </div>
   );
@@ -264,9 +340,45 @@ function LocalResultCard({ match, query }: { match: LocalMatch; query: string })
         />
       </div>
 
-      {/* unused query var for potential highlighting */}
       <span className="sr-only">{query}</span>
     </article>
+  );
+}
+
+function NominatimResults({ places }: { places: IndiaSearchResult["places"] }) {
+  return (
+    <div className="space-y-4 mt-8 pt-6 border-t border-border/60">
+      <div className="flex items-baseline justify-between flex-wrap gap-2">
+        <h4 className="font-display text-xl font-semibold flex items-center gap-2">
+          <Globe2 className="h-4 w-4 text-primary" />
+          Towns & villages from OpenStreetMap
+        </h4>
+        <span className="text-xs text-muted-foreground">
+          {places.length} found · Nominatim
+        </span>
+      </div>
+      <ul className="grid sm:grid-cols-2 gap-2">
+        {places.map((p) => (
+          <li
+            key={p.id}
+            className="text-sm px-3 py-2.5 rounded-lg bg-secondary/50 flex items-start gap-2"
+          >
+            <MapPin className="h-3.5 w-3.5 text-primary mt-0.5 shrink-0" />
+            <div className="min-w-0">
+              <div className="font-medium truncate">{p.name}</div>
+              <div className="text-xs text-muted-foreground truncate">
+                {[p.district, p.state].filter(Boolean).join(", ") || p.label}
+                <span className="ml-1 capitalize">· {p.kind.replace(/_/g, " ")}</span>
+              </div>
+              <HotelAffiliateCard
+                city={`${p.name}${p.state ? `, ${p.state}` : ""}, India`}
+                variant="inline"
+              />
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
