@@ -85,7 +85,16 @@ export function VoiceSearchButton({ onResult, disabled }: Props) {
 
   async function start() {
     if (state === "listening" || state === "requesting") {
-      recogRef.current?.stop();
+      // Immediate cancel — abort() drops any pending result, unlike stop().
+      try {
+        recogRef.current?.abort();
+      } catch {
+        /* noop */
+      }
+      recogRef.current = null;
+      setTranscript("");
+      setErrorMsg(null);
+      setState("idle");
       return;
     }
     const Ctor = getRecognitionCtor();
