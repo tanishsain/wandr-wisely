@@ -21,6 +21,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { formatInr } from "@/lib/currency";
 import { ProPaywall } from "@/components/pro-paywall";
 import { HotelAffiliateCard } from "@/components/hotel-affiliate-card";
+import { PricingPlans, PricingButtonsRow } from "@/components/pricing-plans";
 import { destinations, getDestination } from "@/data/destinations";
 import { generateAIItinerary, type Style, type Interest, type AIItinerary } from "@/lib/ai-planner";
 import { usePro } from "@/hooks/use-pro";
@@ -410,6 +411,17 @@ function PlanPage() {
           )}
         </div>
       </section>
+
+      <div className="mx-auto max-w-6xl px-5 pb-4">
+        <div className="rounded-3xl bg-gradient-to-br from-[#FF6A00]/10 via-card to-card border border-[#FF6A00]/20 p-6 sm:p-8">
+          <p className="text-center text-xs font-semibold uppercase tracking-wider text-[#FF6A00] mb-3">
+            Ready to book your full plan?
+          </p>
+          <PricingButtonsRow />
+        </div>
+      </div>
+
+      <PricingPlans />
 
       <ProPaywall open={paywallOpen} onClose={() => setPaywallOpen(false)} onUnlock={unlock} />
 
