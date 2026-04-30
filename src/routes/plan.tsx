@@ -524,7 +524,7 @@ function buildTextExport(name: string, days: number, style: string, it: AIItiner
   const lines = [
     `WANDR — ${days} days in ${name}`,
     `Style: ${style}`,
-    `Total estimate: $${it.totalEstimate}`,
+    `Total estimate: ${formatInr(it.totalEstimate)}`,
     "",
     it.summary,
     "",
@@ -532,7 +532,7 @@ function buildTextExport(name: string, days: number, style: string, it: AIItiner
     "",
   ];
   it.days.forEach((d, i) => {
-    lines.push(`DAY ${i + 1} — ${d.title}  (~$${d.estimatedSpend})`);
+    lines.push(`DAY ${i + 1} — ${d.title}  (~${formatInr(d.estimatedSpend)})`);
     lines.push(`  Morning:   ${d.morning}`);
     lines.push(`  Midday:    ${d.midday}`);
     lines.push(`  Afternoon: ${d.afternoon}`);
