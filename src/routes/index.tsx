@@ -7,6 +7,7 @@ import { useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { DestinationCard } from "@/components/destination-card";
+import { PricingButtonsRow, PricingPlans } from "@/components/pricing-plans";
 import { destinations } from "@/data/destinations";
 
 export const Route = createFileRoute("/")({
@@ -110,6 +111,13 @@ function HomePage() {
                 {c}
               </Link>
             ))}
+          </div>
+
+          <div className="mt-10">
+            <p className="text-center text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+              Unlock your full trip plan
+            </p>
+            <PricingButtonsRow />
           </div>
         </div>
       </section>
@@ -352,6 +360,8 @@ function HomePage() {
           </Link>
         </div>
       </section>
+
+      <PricingPlans />
 
       <SiteFooter />
     </div>
