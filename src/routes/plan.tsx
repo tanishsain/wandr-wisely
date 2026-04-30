@@ -178,7 +178,7 @@ function PlanPage() {
 
           <label className="block mb-5">
             <span className="text-sm font-medium mb-2 block">
-              Budget (USD): <span className="text-primary font-semibold">${budget}</span> <span className="text-muted-foreground">· {formatInr(budget)}</span>
+              Budget: <span className="text-primary font-semibold">{formatInr(budget)}</span>
             </span>
             <input
               type="range"
@@ -310,9 +310,9 @@ function PlanPage() {
                 </div>
                 <p className="opacity-90 mb-5">{itinerary.summary}</p>
                 <div className="grid grid-cols-3 gap-3 text-sm">
-                  <Stat label="Daily avg" value={`$${Math.round(itinerary.totalEstimate / days)}`} sub={formatInr(Math.round(itinerary.totalEstimate / days))} />
-                  <Stat label="Total est." value={`$${itinerary.totalEstimate}`} sub={formatInr(itinerary.totalEstimate)} />
-                  <Stat label="Your budget" value={`$${budget}`} sub={formatInr(budget)} />
+                  <Stat label="Daily avg" value={formatInr(Math.round(itinerary.totalEstimate / days))} />
+                  <Stat label="Total est." value={formatInr(itinerary.totalEstimate)} />
+                  <Stat label="Your budget" value={formatInr(budget)} />
                 </div>
                 <div
                   className={`mt-4 px-4 py-3 rounded-xl text-sm font-medium ${
@@ -320,8 +320,8 @@ function PlanPage() {
                   }`}
                 >
                   {onBudget
-                    ? `🎉 You're $${budget - itinerary.totalEstimate} (${formatInr(budget - itinerary.totalEstimate)}) under budget.`
-                    : `⚠️ Over budget by $${itinerary.totalEstimate - budget} (${formatInr(itinerary.totalEstimate - budget)}). Try fewer days or backpacker style.`}
+                    ? `🎉 You're ${formatInr(budget - itinerary.totalEstimate)} under budget.`
+                    : `⚠️ Over budget by ${formatInr(itinerary.totalEstimate - budget)}. Try fewer days or backpacker style.`}
                 </div>
                 {isPro && (
                   <button
@@ -360,7 +360,7 @@ function PlanPage() {
                         onClick={() => setPaywallOpen(true)}
                         className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors shadow-soft"
                       >
-                        <Sparkles className="h-4 w-4" /> Unlock Pro · $9
+                        <Sparkles className="h-4 w-4" /> Unlock Pro · from Rs.199
                       </button>
                     </div>
                   </div>
@@ -463,8 +463,7 @@ function DayCard({
         </div>
         <div className="ml-auto text-right">
           <div className="text-xs text-muted-foreground">Est. spend</div>
-          <div className="font-semibold">${day.estimatedSpend}</div>
-          <div className="text-[10px] text-muted-foreground">{formatInr(day.estimatedSpend)}</div>
+          <div className="font-semibold">{formatInr(day.estimatedSpend)}</div>
         </div>
       </div>
 
