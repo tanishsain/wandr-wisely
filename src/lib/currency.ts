@@ -7,10 +7,10 @@ export function usdToInr(usd: number): number {
 }
 
 export function formatInr(usd: number): string {
-  return `₹${usdToInr(usd).toLocaleString("en-IN")}`;
+  return `Rs.${usdToInr(usd).toLocaleString("en-IN")}`;
 }
 
-/** Formats as "$120 / ₹9,960" */
+/** Formats as "Rs.9,960" */
 export function formatUsdInr(usd: number): string {
-  return `$${usd.toLocaleString("en-US")} / ${formatInr(usd)}`;
+  return formatInr(usd);
 }
