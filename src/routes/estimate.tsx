@@ -146,11 +146,10 @@ function EstimatePage() {
               Total for {travelers} {travelers === 1 ? "traveler" : "travelers"} · {days} days
             </p>
             <div className="relative font-display text-6xl md:text-7xl font-semibold mb-1">
-              ${tripTotal.toLocaleString()}
+              {formatInr(tripTotal)}
             </div>
-            <div className="relative text-lg opacity-90 mb-2">{formatInr(tripTotal)}</div>
             <p className="relative opacity-90">
-              About <span className="font-semibold">${dailyTotal}</span> ({formatInr(dailyTotal)}) per person per day in {dest.name}.
+              About <span className="font-semibold">{formatInr(dailyTotal)}</span> per person per day in {dest.name}.
             </p>
           </div>
 
@@ -167,7 +166,7 @@ function EstimatePage() {
                       <span className="font-medium flex items-center gap-2">
                         <span>{r.icon}</span> {r.label}
                       </span>
-                      <span className="font-semibold">${v} <span className="text-muted-foreground font-normal text-xs">· {formatInr(v)}</span></span>
+                      <span className="font-semibold">{formatInr(v)}</span>
                     </div>
                     <div className="h-3 rounded-full bg-secondary overflow-hidden">
                       <div
@@ -184,9 +183,8 @@ function EstimatePage() {
               <span className="text-muted-foreground">Daily total per person</span>
               <div className="text-right">
                 <div className="font-display text-3xl font-semibold text-primary">
-                  ${dailyTotal}
+                  {formatInr(dailyTotal)}
                 </div>
-                <div className="text-xs text-muted-foreground">{formatInr(dailyTotal)}</div>
               </div>
             </div>
           </div>

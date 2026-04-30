@@ -122,7 +122,7 @@ function AttractionsPage() {
                     </span>
                   ) : typeof it.attraction.priceUSD === "number" ? (
                     <span className="text-[10px] px-2 py-0.5 rounded-full bg-secondary font-semibold shrink-0">
-                      ~${it.attraction.priceUSD} · {formatInr(it.attraction.priceUSD)}
+                      ~{formatInr(it.attraction.priceUSD)}
                     </span>
                   ) : null}
                 </div>
