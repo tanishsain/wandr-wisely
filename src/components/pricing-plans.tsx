@@ -76,7 +76,7 @@ export function PricingButtonsRow() {
         >
           <span className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300" />
           <p.icon className="h-4 w-4 relative z-10" />
-          <span className="relative z-10">{p.name} Plan — ₹{p.price}</span>
+          <span className="relative z-10">{p.name} Plan — Rs.{p.price}</span>
           <ArrowRight className="h-4 w-4 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
         </a>
       ))}
@@ -128,7 +128,7 @@ export function PricingPlans({ id = "pricing" }: PricingPlansProps) {
               <p className="text-sm text-muted-foreground mb-4">{p.tagline}</p>
 
               <div className="flex items-baseline gap-1 mb-6">
-                <span className="font-display text-5xl font-semibold">₹{p.price}</span>
+                <span className="font-display text-5xl font-semibold">Rs.{p.price}</span>
                 <span className="text-muted-foreground text-sm">one-time</span>
               </div>
 
@@ -156,7 +156,7 @@ export function PricingPlans({ id = "pricing" }: PricingPlansProps) {
                                : "bg-[#FF6A00] text-white shadow-[0_8px_22px_-10px_rgba(255,106,0,0.6)] hover:bg-[#FF8124] hover:shadow-[0_14px_32px_-10px_rgba(255,106,0,0.75)]"
                            }`}
               >
-                Get {p.name} — ₹{p.price}
+                Get {p.name} — Rs.{p.price}
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
               </a>
             </div>

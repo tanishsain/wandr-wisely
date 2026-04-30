@@ -1,4 +1,5 @@
 import { ExternalLink, BedDouble, Plane, Ticket } from "lucide-react";
+import { formatInr } from "@/lib/currency";
 import {
   bookingHotelsLink,
   airbnbLink,
@@ -36,7 +37,7 @@ export function HotelAffiliateCard({ city, fromUSD, variant = "card" }: Props) {
           <div className="text-right">
             <div className="text-xs text-muted-foreground">From</div>
             <div className="font-display text-2xl font-semibold text-primary">
-              ${fromUSD}
+              {formatInr(fromUSD)}
               <span className="text-xs font-sans text-muted-foreground font-normal"> /night</span>
             </div>
           </div>

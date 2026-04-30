@@ -204,8 +204,8 @@ function DestinationDetail({ dest }: { dest: Destination }) {
 
         <div className="rounded-3xl bg-sunset p-7 text-primary-foreground shadow-warm">
           <p className="text-sm opacity-90 mb-1">Daily budget from</p>
-          <div className="font-display text-5xl font-semibold">${total}</div>
-          <div className="text-sm opacity-90 mb-5">{formatInr(total)} / day</div>
+          <div className="font-display text-5xl font-semibold">{formatInr(total)}</div>
+          <div className="text-sm opacity-90 mb-5">/ day</div>
           <div className="space-y-2.5 text-sm">
             {[
               ["🏨 Stay", dest.costs.stay],
@@ -215,7 +215,7 @@ function DestinationDetail({ dest }: { dest: Destination }) {
             ].map(([label, value]) => (
               <div key={label as string} className="flex justify-between border-b border-primary-foreground/20 pb-2 last:border-0">
                 <span className="opacity-90">{label}</span>
-                <span className="font-medium">${value} <span className="opacity-75 font-normal">· {formatInr(value as number)}</span></span>
+                <span className="font-medium">{formatInr(value as number)}</span>
               </div>
             ))}
           </div>
@@ -252,10 +252,9 @@ function DestinationDetail({ dest }: { dest: Destination }) {
                   <div className="text-right">
                     <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Hotels</div>
                     <div className="font-display text-base font-semibold text-primary">
-                      ${c.hotelFromUSD}
+                      {formatInr(c.hotelFromUSD)}
                       <span className="text-xs text-muted-foreground font-normal">/nt</span>
                     </div>
-                    <div className="text-[10px] text-muted-foreground">{formatInr(c.hotelFromUSD)}/nt</div>
                   </div>
                 </div>
                 <p className="text-sm text-foreground/80 mb-4">{c.hero}</p>
