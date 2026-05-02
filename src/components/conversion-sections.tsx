@@ -40,7 +40,7 @@ export function TrustBadges() {
         {badges.map((b) => (
           <div key={b.label} className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-secondary/40">
             <div className="h-9 w-9 rounded-lg bg-[#FF6A00]/10 text-[#FF6A00] grid place-items-center shrink-0">
-              <b.icon className="h-4.5 w-4.5" />
+              <b.icon className="h-4 w-4" />
             </div>
             <span className="text-xs sm:text-sm font-semibold leading-tight">{b.label}</span>
           </div>
