@@ -70,6 +70,13 @@ export function SiteHeader() {
                 {l.label}
               </Link>
             ))}
+            <Link
+              to="/plan"
+              onClick={() => setOpen(false)}
+              className="mt-2 inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-full bg-[#FF6A00] text-white text-base font-semibold shadow-[0_6px_18px_-6px_rgba(255,106,0,0.6)] hover:bg-[#FF8124] transition-all"
+            >
+              Plan Your Trip →
+            </Link>
           </div>
         </nav>
       )}
