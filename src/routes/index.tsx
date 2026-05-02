@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  Search, Compass, Wallet, Sparkles, ArrowRight,
-  Star, Shield, Globe2, Users, Award, CheckCircle2, Quote, MapPin,
+  Search, Compass, Wallet, Sparkles, ArrowRight, MapPin,
 } from "lucide-react";
 import { useState } from "react";
 import { SiteHeader } from "@/components/site-header";
