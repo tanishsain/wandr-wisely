@@ -38,6 +38,12 @@ export function SiteHeader() {
               {l.label}
             </Link>
           ))}
+          <Link
+            to="/plan"
+            className="ml-2 inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#FF6A00] text-white text-sm font-semibold shadow-[0_6px_18px_-6px_rgba(255,106,0,0.6)] hover:bg-[#FF8124] hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-8px_rgba(255,106,0,0.75)] transition-all duration-300"
+          >
+            Plan Your Trip →
+          </Link>
         </nav>
 
         <button
