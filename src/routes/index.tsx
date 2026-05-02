@@ -1,13 +1,21 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  Search, Compass, Wallet, Sparkles, ArrowRight,
-  Star, Shield, Globe2, Users, Award, CheckCircle2, Quote, MapPin,
+  Search, Compass, Wallet, Sparkles, ArrowRight, MapPin,
 } from "lucide-react";
 import { useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { DestinationCard } from "@/components/destination-card";
 import { PricingButtonsRow, PricingPlans } from "@/components/pricing-plans";
+import {
+  HeroSocialProof,
+  TrustBadges,
+  TestimonialsGrid,
+  UrgencyBanner,
+  ComparisonSection,
+  GuaranteeSection,
+  FAQSection,
+} from "@/components/conversion-sections";
 import { destinations } from "@/data/destinations";
 
 export const Route = createFileRoute("/")({
@@ -72,10 +80,12 @@ function HomePage() {
             <span className="bg-sunset bg-clip-text text-transparent">on less.</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-balance">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 text-balance">
             Discover the world's most beautiful places and plan trips that
             don't drain your wallet. Wandr is your friendly travel companion.
           </p>
+
+          <HeroSocialProof />
 
           <form
             onSubmit={handleSubmit}
@@ -122,27 +132,8 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Trust strip / Statistics */}
-      <section className="border-y border-border/60 bg-card">
-        <div className="mx-auto max-w-6xl px-5 py-10 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[
-            { icon: Globe2, value: "25+", label: "Curated destinations" },
-            { icon: Users, value: "12,000+", label: "Trips planned" },
-            { icon: Star, value: "4.9/5", label: "Traveler rating" },
-            { icon: Shield, value: "100%", label: "Free to use" },
-          ].map((s) => (
-            <div key={s.label} className="flex items-center gap-3">
-              <div className="h-11 w-11 rounded-2xl bg-secondary grid place-items-center shrink-0">
-                <s.icon className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <div className="font-display text-2xl font-semibold leading-none">{s.value}</div>
-                <div className="text-xs text-muted-foreground mt-1">{s.label}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Trust badges strip */}
+      <TrustBadges />
 
       {/* How it works */}
       <section className="mx-auto max-w-6xl px-5 py-20">
@@ -288,58 +279,10 @@ function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-warm/40 border-y border-border/60">
-        <div className="mx-auto max-w-6xl px-5 py-20">
-          <div className="text-center mb-12">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-primary mb-3">Loved by travelers</span>
-            <h2 className="font-display text-4xl md:text-5xl font-semibold mb-3">
-              What our travelers say
-            </h2>
-            <div className="flex items-center justify-center gap-1 text-primary">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-5 w-5 fill-current" />
-              ))}
-              <span className="ml-2 text-sm text-muted-foreground">4.9 average from 2,400+ reviews</span>
-            </div>
-          </div>
+      <TestimonialsGrid />
 
-          <div className="grid md:grid-cols-3 gap-5">
-            {[
-              { name: "Priya Sharma", trip: "Rajasthan · 10 days", quote: "Wandr's cost estimator was spot on. We did Jaipur, Jodhpur and Jaisalmer well under budget and the AI itinerary saved hours of planning." },
-              { name: "Marco Rivera", trip: "Bali · 2 weeks", quote: "Honest tips, no spammy affiliate clutter. The hidden gems in Ubud were exactly what I was hoping to find." },
-              { name: "Aiko Tanaka", trip: "Lisbon · weekend", quote: "Loved the curated highlights — felt like advice from a well-traveled friend, not a generic listicle." },
-            ].map((t) => (
-              <figure key={t.name} className="p-7 rounded-3xl bg-card border border-border/60 shadow-soft flex flex-col">
-                <Quote className="h-6 w-6 text-primary/40 mb-3" />
-                <blockquote className="text-foreground/90 mb-5 flex-1">"{t.quote}"</blockquote>
-                <div className="flex items-center gap-1 text-primary mb-2" aria-label="5 star rating">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-current" />
-                  ))}
-                </div>
-                <figcaption>
-                  <div className="font-semibold">{t.name}</div>
-                  <div className="text-xs text-muted-foreground">{t.trip}</div>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-
-          <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3">
-            {[
-              { icon: Shield, label: "Secure by design" },
-              { icon: CheckCircle2, label: "No hidden fees" },
-              { icon: Award, label: "Editor-curated" },
-              { icon: Globe2, label: "Worldwide coverage" },
-            ].map((b) => (
-              <div key={b.label} className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-card border border-border/60 text-sm font-medium">
-                <b.icon className="h-4 w-4 text-primary shrink-0" />
-                {b.label}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Comparison */}
+      <ComparisonSection />
 
       {/* CTA */}
       <section className="mx-auto max-w-4xl px-5 py-20">
@@ -361,7 +304,15 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Urgency + Pricing */}
+      <UrgencyBanner />
       <PricingPlans />
+
+      {/* Money back guarantee */}
+      <GuaranteeSection />
+
+      {/* FAQ */}
+      <FAQSection />
 
       <SiteFooter />
     </div>

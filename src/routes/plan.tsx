@@ -22,6 +22,7 @@ import { formatInr } from "@/lib/currency";
 import { ProPaywall } from "@/components/pro-paywall";
 import { HotelAffiliateCard } from "@/components/hotel-affiliate-card";
 import { PricingPlans, PricingButtonsRow } from "@/components/pricing-plans";
+import { UrgencyBanner, GuaranteeSection, FAQSection } from "@/components/conversion-sections";
 import { destinations, getDestination } from "@/data/destinations";
 import { generateAIItinerary, type Style, type Interest, type AIItinerary } from "@/lib/ai-planner";
 import { usePro } from "@/hooks/use-pro";
@@ -421,7 +422,10 @@ function PlanPage() {
         </div>
       </div>
 
+      <UrgencyBanner />
       <PricingPlans />
+      <GuaranteeSection />
+      <FAQSection />
 
       <ProPaywall open={paywallOpen} onClose={() => setPaywallOpen(false)} onUnlock={unlock} />
 
