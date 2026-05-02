@@ -81,10 +81,12 @@ function HomePage() {
             <span className="bg-sunset bg-clip-text text-transparent">on less.</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-balance">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 text-balance">
             Discover the world's most beautiful places and plan trips that
             don't drain your wallet. Wandr is your friendly travel companion.
           </p>
+
+          <HeroSocialProof />
 
           <form
             onSubmit={handleSubmit}
