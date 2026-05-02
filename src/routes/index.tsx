@@ -8,6 +8,15 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { DestinationCard } from "@/components/destination-card";
 import { PricingButtonsRow, PricingPlans } from "@/components/pricing-plans";
+import {
+  HeroSocialProof,
+  TrustBadges,
+  TestimonialsGrid,
+  UrgencyBanner,
+  ComparisonSection,
+  GuaranteeSection,
+  FAQSection,
+} from "@/components/conversion-sections";
 import { destinations } from "@/data/destinations";
 
 export const Route = createFileRoute("/")({
