@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import {
+  ArrowLeft,
   ArrowRight,
   Calendar,
   Clock,
@@ -7,10 +8,12 @@ import {
   Instagram,
   MessageCircle,
   MapPin,
+  Sparkles,
+  Zap,
+  Crown,
 } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { PricingButtonsRow } from "@/components/pricing-plans";
 import { blogPosts } from "@/data/blog";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -50,10 +53,7 @@ export const Route = createFileRoute("/blog/$slug")({
             image: [post.cover],
             datePublished: post.date,
             author: { "@type": "Organization", name: "Wandr Wisely" },
-            publisher: {
-              "@type": "Organization",
-              name: "Wandr Wisely",
-            },
+            publisher: { "@type": "Organization", name: "Wandr Wisely" },
             mainEntityOfPage: url,
             keywords: post.keywords.join(", "),
           }),
@@ -62,7 +62,7 @@ export const Route = createFileRoute("/blog/$slug")({
     };
   },
   notFoundComponent: () => (
-    <div className="min-h-screen grid place-items-center bg-background">
+    <div className="min-h-screen grid place-items-center bg-background px-5">
       <div className="text-center">
         <h1 className="font-display text-4xl mb-3">Article not found</h1>
         <Link to="/blog" className="text-primary font-medium">
@@ -72,93 +72,117 @@ export const Route = createFileRoute("/blog/$slug")({
     </div>
   ),
   errorComponent: ({ error }) => (
-    <div className="min-h-screen grid place-items-center bg-background">
+    <div className="min-h-screen grid place-items-center bg-background px-5">
       <p className="text-muted-foreground">{error.message}</p>
     </div>
   ),
   component: BlogPostPage,
 });
 
-const rajasthanPlaces = [
+const places = [
   {
     name: "Jaipur — The Pink City",
     slug: "jaipur",
     emoji: "🏰",
-    why: "Jaipur is the gateway to Rajasthan and one of the best places to visit in India for first-timers. Wander the Amber Fort at sunrise, marvel at the honeycomb facade of Hawa Mahal, and shop for block-printed textiles in Johari Bazaar.",
-    budget: "Rs.1,500–2,500/day",
-    stay: "2 nights",
-  },
-  {
-    name: "Udaipur — City of Lakes",
-    slug: "udaipur",
-    emoji: "🛶",
-    why: "Often called the most romantic city in India, Udaipur's whitewashed havelis ring Lake Pichola. Take a sunset boat ride past the Lake Palace, then catch a rooftop dinner overlooking the City Palace.",
-    budget: "Rs.1,800–3,000/day",
-    stay: "2 nights",
-  },
-  {
-    name: "Jaisalmer — The Golden City",
-    slug: "jaisalmer",
-    emoji: "🐪",
-    why: "Rising out of the Thar Desert, Jaisalmer's living sandstone fort glows gold at sunset. A camel safari and overnight in Sam Sand Dunes is a bucket-list Rajasthan experience.",
-    budget: "Rs.1,500–2,800/day",
-    stay: "2 nights",
+    mustVisit: "Amber Fort, Hawa Mahal, City Palace, Jantar Mantar",
+    bestTime: "October to March",
+    budget: "Rs.2,000 – Rs.5,000 per day",
   },
   {
     name: "Jodhpur — The Blue City",
     slug: "jodhpur",
     emoji: "🔵",
-    why: "Mehrangarh Fort towers over a sea of indigo houses. Don't miss the stepwell Toorji Ka Jhalra and a Rajasthani thali at one of the rooftop cafes in the old town.",
-    budget: "Rs.1,400–2,400/day",
-    stay: "2 nights",
+    mustVisit: "Mehrangarh Fort, Jaswant Thada, Umaid Bhawan Palace",
+    bestTime: "October to February",
+    budget: "Rs.1,500 – Rs.4,000 per day",
   },
   {
-    name: "Pushkar — The Holy Town",
+    name: "Jaisalmer — The Golden City",
+    slug: "jaisalmer",
+    emoji: "🐪",
+    mustVisit: "Jaisalmer Fort, Sam Sand Dunes, Desert Safari",
+    bestTime: "November to February",
+    budget: "Rs.2,000 – Rs.6,000 per day",
+  },
+  {
+    name: "Udaipur — The City of Lakes",
+    slug: "udaipur",
+    emoji: "🛶",
+    mustVisit: "Lake Pichola, City Palace, Jag Mandir",
+    bestTime: "September to March",
+    budget: "Rs.2,500 – Rs.7,000 per day",
+  },
+  {
+    name: "Pushkar — The Holy City",
     slug: "pushkar",
     emoji: "🪔",
-    why: "Wrapped around a sacred lake with 52 ghats, Pushkar is where backpackers and pilgrims meet. Visit during the famous November Camel Fair for a once-in-a-lifetime spectacle.",
-    budget: "Rs.900–1,800/day",
-    stay: "1 night",
+    mustVisit: "Brahma Temple, Pushkar Lake, Savitri Temple",
+    bestTime: "October to March",
+    budget: "Rs.1,000 – Rs.3,000 per day",
   },
   {
-    name: "Bikaner — Camel Country",
+    name: "Bikaner — The Camel City",
     slug: "bikaner",
     emoji: "🕌",
-    why: "Off the typical tourist trail, Bikaner offers Junagarh Fort, the National Research Centre on Camels, and Rajasthan's best sweets — try a hot kachori at Chhotu Motu Joshi.",
-    budget: "Rs.1,000–2,000/day",
-    stay: "1 night",
+    mustVisit: "Junagarh Fort, Karni Mata Temple, Lalgarh Palace",
+    bestTime: "October to February",
+    budget: "Rs.1,000 – Rs.3,000 per day",
   },
   {
-    name: "Mount Abu — Hill Station Escape",
-    slug: "mount-abu",
-    emoji: "⛰️",
-    why: "Rajasthan's only hill station offers a cool break from desert heat. The Dilwara Jain Temples are an architectural marvel and Nakki Lake is great for an evening stroll.",
-    budget: "Rs.1,200–2,200/day",
-    stay: "1 night",
-  },
-  {
-    name: "Ranthambore — Tiger Country",
+    name: "Ranthambore — Wildlife Paradise",
     slug: "ranthambore",
     emoji: "🐯",
-    why: "One of India's best places to spot a Bengal tiger in the wild. Book a morning jeep safari in Zone 3 or 4 for the best chances and pair it with the ruined Ranthambore Fort.",
-    budget: "Rs.2,500–4,500/day",
-    stay: "2 nights",
+    mustVisit: "National Park, Tiger Safari, Ranthambore Fort",
+    bestTime: "October to June",
+    budget: "Rs.3,000 – Rs.8,000 per day",
   },
   {
-    name: "Chittorgarh — Land of Legends",
+    name: "Mount Abu — Hill Station",
+    slug: "mount-abu",
+    emoji: "⛰️",
+    mustVisit: "Dilwara Jain Temples, Nakki Lake, Guru Shikhar",
+    bestTime: "October to June",
+    budget: "Rs.1,500 – Rs.4,000 per day",
+  },
+  {
+    name: "Chittorgarh — City of Valor",
     slug: "chittorgarh",
     emoji: "⚔️",
-    why: "The largest fort in India, Chittorgarh is steeped in tales of Rajput valor. Climb the Vijay Stambh (Tower of Victory) for sweeping views of the plains.",
-    budget: "Rs.1,000–2,000/day",
-    stay: "1 night",
+    mustVisit: "Chittorgarh Fort, Vijay Stambha, Meera Temple",
+    bestTime: "October to March",
+    budget: "Rs.1,000 – Rs.3,000 per day",
   },
   {
-    name: "Bundi — The Hidden Gem",
-    slug: "bundi",
-    emoji: "🎨",
-    why: "Skipped by most tour buses, Bundi rewards travelers with a stunning step-well (Raniji ki Baori), the dreamy Taragarh Fort, and miniature paintings inside Chitrashala.",
-    budget: "Rs.800–1,600/day",
-    stay: "1 night",
+    name: "Sri Ganganagar — Hidden Gem",
+    slug: "sri-ganganagar",
+    emoji: "🌾",
+    mustVisit: "Hari Singh Park, Gandhi Park, Local Fruit Markets",
+    bestTime: "October to March",
+    budget: "Rs.800 – Rs.2,000 per day",
+  },
+];
+
+const plans = [
+  {
+    name: "Basic",
+    price: "Rs.199",
+    href: "https://rzp.io/rzp/wandrwisely-basic",
+    icon: Sparkles,
+    cls: "bg-card border-border text-foreground",
+  },
+  {
+    name: "Standard",
+    price: "Rs.499",
+    href: "https://rzp.io/rzp/wandrwisely-standard",
+    icon: Zap,
+    cls: "bg-[#FF6A00] border-[#FF6A00] text-white",
+  },
+  {
+    name: "Premium",
+    price: "Rs.999",
+    href: "https://rzp.io/rzp/otXOpEWz",
+    icon: Crown,
+    cls: "bg-foreground border-foreground text-background",
   },
 ];
 
@@ -167,7 +191,7 @@ function BlogPostPage() {
   const shareUrl = `https://wandr-wisely.lovable.app/blog/${post.slug}`;
   const shareText = `${post.title} — ${post.description}`;
   const whatsappHref = `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`;
-  const instagramHref = `https://www.instagram.com/`; // IG has no web share intent; opens app/site
+  const instagramHref = "https://www.instagram.com/";
 
   const copyLink = async () => {
     try {
@@ -179,16 +203,16 @@ function BlogPostPage() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
 
-      {/* Hero */}
       <article>
-        <header className="mx-auto max-w-3xl px-5 pt-12 pb-6">
+        <header className="mx-auto max-w-3xl px-5 pt-8 md:pt-12 pb-6">
           <Link
             to="/blog"
-            className="text-sm text-muted-foreground hover:text-primary"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary mb-6"
           >
-            ← All articles
+            <ArrowLeft className="h-4 w-4" /> Back to blog
           </Link>
-          <div className="flex items-center gap-4 text-xs text-muted-foreground mt-4 mb-4">
+
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground mb-4">
             <span className="flex items-center gap-1">
               <Calendar className="h-3.5 w-3.5" /> {post.date}
             </span>
@@ -196,12 +220,14 @@ function BlogPostPage() {
               <Clock className="h-3.5 w-3.5" /> {post.readMins} min read
             </span>
           </div>
-          <h1 className="font-display text-4xl md:text-5xl font-semibold tracking-tight text-balance mb-4">
+
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-balance mb-4">
             {post.title}
           </h1>
-          <p className="text-lg text-muted-foreground">{post.description}</p>
+          <p className="text-base sm:text-lg text-muted-foreground">
+            {post.description}
+          </p>
 
-          {/* Share */}
           <div className="flex flex-wrap items-center gap-2 mt-6">
             <span className="text-sm font-medium text-muted-foreground mr-1">
               Share:
@@ -239,138 +265,113 @@ function BlogPostPage() {
           <img
             src={post.cover}
             alt="Hawa Mahal palace facade in Jaipur, Rajasthan"
-            className="w-full aspect-[16/9] object-cover rounded-3xl shadow-warm"
+            className="w-full aspect-[16/9] object-cover rounded-2xl md:rounded-3xl shadow-warm"
           />
         </div>
 
-        {/* Body */}
-        <div className="mx-auto max-w-3xl px-5 py-12 prose prose-lg max-w-none">
-          <p className="text-lg leading-relaxed text-foreground/90">
+        <div className="mx-auto max-w-3xl px-5 py-10 md:py-14">
+          <p className="text-base md:text-lg leading-relaxed text-foreground/90">
             Rajasthan, the <strong>land of kings</strong>, is India's most
             visually arresting state — a sun-baked tapestry of mighty forts,
-            mirrored palaces, painted havelis and rolling sand dunes. Whether
-            you have 5 days or 3 weeks, these are the{" "}
-            <strong>top 10 places to visit in Rajasthan</strong> in 2026, with
-            real budgets and how long to stay.
+            mirrored palaces, painted havelis and rolling sand dunes. Here are
+            the <strong>top 10 places to visit in Rajasthan</strong>, with the
+            must-see sights, the best season and what each destination will cost
+            you per day.
           </p>
 
-          <div className="my-10 p-6 rounded-2xl bg-warm border border-border/60">
-            <h2 className="font-display text-2xl font-semibold mb-3 mt-0">
-              Quick Rajasthan trip facts
-            </h2>
-            <ul className="space-y-1 text-foreground/85 my-0">
-              <li>
-                <strong>Best time to visit:</strong> October to March (cool,
-                dry, perfect sightseeing weather)
-              </li>
-              <li>
-                <strong>Ideal duration:</strong> 10–14 days for the classic
-                circuit
-              </li>
-              <li>
-                <strong>Daily budget:</strong> Rs.1,500 backpacker · Rs.3,500
-                mid-range · Rs.8,000+ luxury
-              </li>
-              <li>
-                <strong>Getting around:</strong> Trains between cities, autos
-                and Ola/Uber within
-              </li>
-            </ul>
+          <div className="mt-10 space-y-6">
+            {places.map((p, i) => (
+              <section
+                key={p.slug}
+                className="p-5 md:p-7 rounded-2xl bg-card border border-border/60 shadow-soft"
+              >
+                <h2 className="font-display text-2xl md:text-3xl font-semibold flex flex-wrap items-center gap-2 md:gap-3">
+                  <span className="text-primary font-bold">{i + 1}.</span>
+                  <span aria-hidden>{p.emoji}</span>
+                  <span>{p.name}</span>
+                </h2>
+                <dl className="mt-4 space-y-2 text-sm md:text-base">
+                  <div className="flex flex-col sm:flex-row sm:gap-2">
+                    <dt className="font-semibold min-w-[110px] text-foreground">
+                      Must visit:
+                    </dt>
+                    <dd className="text-foreground/80">{p.mustVisit}</dd>
+                  </div>
+                  <div className="flex flex-col sm:flex-row sm:gap-2">
+                    <dt className="font-semibold min-w-[110px] text-foreground">
+                      Best time:
+                    </dt>
+                    <dd className="text-foreground/80">{p.bestTime}</dd>
+                  </div>
+                  <div className="flex flex-col sm:flex-row sm:gap-2">
+                    <dt className="font-semibold min-w-[110px] text-foreground">
+                      Budget:
+                    </dt>
+                    <dd className="text-foreground/80">{p.budget}</dd>
+                  </div>
+                </dl>
+              </section>
+            ))}
           </div>
 
-          {rajasthanPlaces.map((place, i) => (
-            <section key={place.slug} className="mt-10">
-              <h2 className="font-display text-3xl font-semibold mb-3 flex items-center gap-3">
-                <span className="text-2xl text-primary font-bold">
-                  {i + 1}.
-                </span>
-                <span>{place.emoji}</span>
-                {place.name}
-              </h2>
-              <p className="text-foreground/85">{place.why}</p>
-              <p className="text-sm text-muted-foreground mt-2">
-                <strong className="text-foreground">Budget:</strong>{" "}
-                {place.budget} ·{" "}
-                <strong className="text-foreground">Recommended stay:</strong>{" "}
-                {place.stay}
-              </p>
-            </section>
-          ))}
-
-          <h2 className="font-display text-3xl font-semibold mt-12 mb-4">
-            Suggested 10-day Rajasthan itinerary
-          </h2>
-          <p>
-            Short on time? Combine the highlights into one unforgettable loop:{" "}
-            <strong>
-              Delhi → Jaipur (2N) → Pushkar (1N) → Jodhpur (2N) → Jaisalmer (2N)
-              → Udaipur (2N) → Mumbai
-            </strong>
-            . Trains between cities are cheap (Rs.300–800 in sleeper class) and
-            an overnight train is one less hotel to pay for.
-          </p>
-
-          <h2 className="font-display text-3xl font-semibold mt-10 mb-4">
-            How much does a Rajasthan trip cost?
-          </h2>
-          <p>
-            A budget-friendly 10-day Rajasthan trip costs around{" "}
-            <strong>Rs.18,000–25,000 per person</strong> including stays,
-            transport, food and entry fees. Mid-range travelers should plan{" "}
-            <strong>Rs.40,000–55,000</strong>, and luxury heritage-hotel trips
-            start at <strong>Rs.1,20,000+</strong>.
-          </p>
-
-          {/* CTA block */}
-          <div className="not-prose my-12 p-8 rounded-3xl bg-sunset text-primary-foreground shadow-warm text-center">
-            <h2 className="font-display text-3xl font-semibold mb-2">
-              Want a custom Rajasthan plan?
+          {/* Final CTA */}
+          <div className="mt-12 p-6 md:p-10 rounded-3xl bg-sunset text-primary-foreground shadow-warm text-center">
+            <h2 className="font-display text-2xl md:text-4xl font-semibold mb-3">
+              Plan your Rajasthan trip with Wandr Wisely!
             </h2>
-            <p className="text-primary-foreground/90 mb-6 max-w-xl mx-auto">
-              Get an AI-crafted, day-by-day itinerary with hotels, transport
-              and budget — delivered instantly. Pick a plan below.
+            <p className="text-primary-foreground/90 mb-6 max-w-xl mx-auto text-sm md:text-base">
+              Get a custom day-by-day itinerary, budget breakdown and hotel
+              picks — delivered instantly. Choose your plan:
             </p>
-            <PricingButtonsRow />
+
+            <div className="grid sm:grid-cols-3 gap-3 max-w-2xl mx-auto">
+              {plans.map((p) => (
+                <a
+                  key={p.name}
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`group flex flex-col items-center justify-center gap-1 px-4 py-5 rounded-2xl border-2 font-semibold shadow-soft hover:-translate-y-1 hover:shadow-warm transition-all ${p.cls}`}
+                >
+                  <p.icon className="h-6 w-6 mb-1" />
+                  <span className="text-sm uppercase tracking-wider opacity-80">
+                    {p.name} Plan
+                  </span>
+                  <span className="text-2xl font-bold">{p.price}</span>
+                </a>
+              ))}
+            </div>
+
             <Link
               to="/plan"
-              className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card text-primary font-semibold hover:scale-105 transition-transform"
+              className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card text-primary font-semibold hover:scale-105 transition-transform"
             >
               Try the free planner <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
-          <h2 className="font-display text-3xl font-semibold mt-10 mb-4">
-            Final tips for visiting Rajasthan
-          </h2>
-          <ul>
-            <li>Carry cash — small towns and dhabas often won't accept UPI.</li>
-            <li>
-              Dress modestly when visiting temples and forts, and always remove
-              shoes at religious sites.
-            </li>
-            <li>
-              Book Ranthambore safaris and luxury heritage stays at least 30
-              days in advance.
-            </li>
-            <li>
-              Negotiate auto fares before you start the ride — or use Ola/Uber
-              in Jaipur, Jodhpur and Udaipur.
-            </li>
-          </ul>
+          <div className="mt-10 text-center">
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary"
+            >
+              <ArrowLeft className="h-4 w-4" /> Back to all articles
+            </Link>
+          </div>
         </div>
       </article>
 
       {/* Related destinations */}
       <section className="bg-secondary/40">
-        <div className="mx-auto max-w-6xl px-5 py-16">
-          <h2 className="font-display text-3xl md:text-4xl font-semibold mb-2">
+        <div className="mx-auto max-w-6xl px-5 py-14 md:py-16">
+          <h2 className="font-display text-2xl md:text-4xl font-semibold mb-2">
             Related destinations
           </h2>
           <p className="text-muted-foreground mb-8">
             Explore in-depth guides for the cities featured in this article.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {rajasthanPlaces.slice(0, 6).map((c) => (
+            {places.slice(0, 6).map((c) => (
               <Link
                 key={c.slug}
                 to="/explore"
@@ -386,8 +387,8 @@ function BlogPostPage() {
                 <h3 className="font-display text-xl font-semibold mb-1">
                   {c.name}
                 </h3>
-                <p className="text-sm text-muted-foreground line-clamp-2">
-                  {c.why}
+                <p className="text-sm text-muted-foreground">
+                  Best time: {c.bestTime}
                 </p>
                 <div className="mt-4 text-primary text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                   See guide <ArrowRight className="h-4 w-4" />
