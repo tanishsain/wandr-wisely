@@ -11,6 +11,7 @@ export function SiteHeader() {
     { to: "/attractions", label: "Attractions" },
     { to: "/plan", label: "Plan a Trip" },
     { to: "/estimate", label: "Cost Estimator" },
+    { to: "/blog", label: "Blog" },
     { to: "/about", label: "About" },
   ] as const;
 
