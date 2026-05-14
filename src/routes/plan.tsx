@@ -48,6 +48,23 @@ export const Route = createFileRoute("/plan")({
       },
     ],
     links: [{ rel: "canonical", href: "https://wandr-wisely.lovable.app/plan" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            { "@type": "Question", name: "How quickly will I get my itinerary?", acceptedAnswer: { "@type": "Answer", text: "Instantly after payment! Your full day-by-day plan is unlocked the moment your Razorpay checkout completes." } },
+            { "@type": "Question", name: "What if I don't like my itinerary?", acceptedAnswer: { "@type": "Answer", text: "100% money back guarantee — no questions asked. Just email us within 7 days and we'll refund you in full." } },
+            { "@type": "Question", name: "Can I plan trips outside Rajasthan?", acceptedAnswer: { "@type": "Answer", text: "Yes! We cover all of India — from Kerala backwaters to Ladakh, Goa to the North-East." } },
+            { "@type": "Question", name: "Which plan should I choose?", acceptedAnswer: { "@type": "Answer", text: "Standard Plan is our most popular choice — perfect balance of features and price for week-long trips." } },
+            { "@type": "Question", name: "Is my payment secure?", acceptedAnswer: { "@type": "Answer", text: "Yes! All payments are securely processed by Razorpay with bank-grade encryption. We never see your card details." } },
+            { "@type": "Question", name: "Can I modify my itinerary?", acceptedAnswer: { "@type": "Answer", text: "Standard plan includes 2 free revisions. Premium plan includes 5 revisions plus WhatsApp support." } },
+          ],
+        }),
+      },
+    ],
   }),
   component: PlanPage,
 });

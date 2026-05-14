@@ -28,7 +28,7 @@ export const Route = createFileRoute("/blog/$slug")({
     const url = `https://wandr-wisely.lovable.app/blog/${post.slug}`;
     return {
       meta: [
-        { title: `${post.title} | Wandr Wisely` },
+        { title: post.title },
         { name: "description", content: post.description },
         { name: "keywords", content: post.keywords.join(", ") },
         { property: "og:type", content: "article" },

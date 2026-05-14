@@ -12,7 +12,7 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     slug: "top-10-places-to-visit-in-rajasthan",
-    title: "Top 10 Places to Visit in Rajasthan: The Ultimate 2026 Travel Guide",
+    title: "Top 10 Places to Visit in Rajasthan (2026 Guide)",
     description:
       "Discover the top 10 places to visit in Rajasthan — from Jaipur's pink palaces to Jaisalmer's golden dunes. Budget tips, itineraries & must-see attractions.",
     keywords: [

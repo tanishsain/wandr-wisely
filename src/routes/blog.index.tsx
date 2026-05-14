@@ -18,7 +18,9 @@ export const Route = createFileRoute("/blog/")({
         property: "og:description",
         content: "Honest travel guides, budget tips and itineraries.",
       },
+      { property: "og:url", content: "https://wandr-wisely.lovable.app/blog" },
     ],
+    links: [{ rel: "canonical", href: "https://wandr-wisely.lovable.app/blog" }],
   }),
   component: BlogIndex,
 });
