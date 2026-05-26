@@ -2,27 +2,47 @@ import { Link } from "@tanstack/react-router";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-24 border-t border-border/60 bg-secondary/40">
-      <div className="mx-auto max-w-6xl px-5 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-        <div className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-full bg-sunset grid place-items-center text-sm">
-            🌅
-          </div>
-          <span className="font-display text-xl font-semibold">Wandr</span>
-        </div>
-        <p className="text-sm text-muted-foreground max-w-md">
-          Travel further on less. Curated destinations and budget tips for the
-          curious traveler.
+    <footer
+      className="mt-24 border-t border-gold"
+      style={{ background: "var(--ink-deep)" }}
+    >
+      <div className="mx-auto max-w-6xl px-6 py-16 text-center">
+        <Link to="/" className="inline-flex items-center gap-3 group">
+          <span className="text-2xl">🌅</span>
+          <span className="font-display text-4xl font-medium tracking-tight text-gold-gradient">
+            Wandr
+          </span>
+        </Link>
+
+        <p className="mt-4 text-sm tracking-[0.22em] uppercase text-gold/80">
+          Travel further · spend less
         </p>
-        <div className="flex gap-5 text-sm text-muted-foreground">
-          <Link to="/explore" className="hover:text-primary">Explore</Link>
-          <Link to="/plan" className="hover:text-primary">Plan</Link>
-          <Link to="/estimate" className="hover:text-primary">Estimate</Link>
-          <Link to="/about" className="hover:text-primary">About</Link>
-        </div>
-      </div>
-      <div className="text-center text-xs text-muted-foreground pb-6">
-        © {new Date().getFullYear()} Wandr · Made with warmth
+
+        <div
+          className="mx-auto my-10 h-px w-24"
+          style={{ background: "linear-gradient(90deg, transparent, var(--gold), transparent)" }}
+        />
+
+        <nav className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[11px] tracking-[0.22em] uppercase text-muted-foreground">
+          <Link to="/explore" className="hover:text-gold transition-colors">Explore</Link>
+          <Link to="/attractions" className="hover:text-gold transition-colors">Attractions</Link>
+          <Link to="/plan" className="hover:text-gold transition-colors">Plan a Trip</Link>
+          <Link to="/estimate" className="hover:text-gold transition-colors">Estimator</Link>
+          <Link to="/blog" className="hover:text-gold transition-colors">Journal</Link>
+          <Link to="/about" className="hover:text-gold transition-colors">About</Link>
+        </nav>
+
+        <div
+          className="mx-auto my-10 h-px w-24"
+          style={{ background: "linear-gradient(90deg, transparent, var(--gold), transparent)" }}
+        />
+
+        <p className="font-display italic text-base text-champagne">
+          Made with warmth
+        </p>
+        <p className="mt-2 text-xs text-muted-foreground">
+          © {new Date().getFullYear()} Wandr · All journeys begin somewhere
+        </p>
       </div>
     </footer>
   );
