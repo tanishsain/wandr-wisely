@@ -4,23 +4,23 @@ import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-warm px-4">
+    <div className="flex min-h-screen items-center justify-center bg-night px-4">
       <div className="max-w-md text-center">
-        <div className="text-7xl mb-4">🧭</div>
-        <h1 className="font-display text-6xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">
-          Looks like you wandered off the map
+        <div className="eyebrow mb-6">Off the map</div>
+        <h1 className="font-display text-7xl font-medium text-gold-gradient">404</h1>
+        <h2 className="mt-4 text-xl font-medium text-foreground">
+          You've wandered beyond our borders
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't exist — but plenty of other
-          adventures await.
+          journeys await.
         </p>
-        <div className="mt-6">
+        <div className="mt-8">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-soft hover:shadow-warm transition-all"
+            className="inline-flex items-center justify-center rounded-full bg-gold px-7 py-3 text-sm font-medium text-primary-foreground shadow-gold hover:shadow-glow transition-all tracking-wide uppercase"
           >
-            Take me home
+            Return home
           </Link>
         </div>
       </div>
@@ -51,7 +51,7 @@ export const Route = createRootRoute({
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap",
       },
     ],
   }),

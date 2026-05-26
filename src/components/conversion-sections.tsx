@@ -4,22 +4,12 @@ import { useEffect, useState } from "react";
 /* -------------------- Social proof (hero) -------------------- */
 export function HeroSocialProof() {
   return (
-    <div className="flex flex-col items-center gap-2 mb-8">
-      <div className="flex items-center gap-1 text-[#FF6A00]">
+    <div className="flex flex-col items-center gap-3 mb-10">
+      <div className="flex items-center gap-1.5 text-gold">
         {Array.from({ length: 5 }).map((_, i) => (
-          <Star key={i} className="h-5 w-5 fill-current" />
+          <Star key={i} className="h-4 w-4 fill-current" />
         ))}
-        <span className="ml-2 text-sm font-semibold text-foreground">4.9/5</span>
-      </div>
-      <div className="flex items-center gap-3 text-sm text-muted-foreground">
-        <div className="flex -space-x-2">
-          {["bg-[#FF6A00]", "bg-amber-400", "bg-rose-400", "bg-emerald-400", "bg-sky-400"].map((c, i) => (
-            <div key={i} className={`h-7 w-7 rounded-full border-2 border-background ${c} grid place-items-center text-[10px] font-bold text-white`}>
-              {["P", "R", "A", "S", "V"][i]}
-            </div>
-          ))}
-        </div>
-        <span><span className="font-semibold text-foreground">Join 500+ happy travelers</span> planning smarter trips</span>
+        <span className="ml-3 text-xs font-medium tracking-[0.22em] uppercase text-foreground/80">4.9 · 500+ Travelers</span>
       </div>
     </div>
   );
@@ -28,21 +18,21 @@ export function HeroSocialProof() {
 /* -------------------- Trust badges strip -------------------- */
 export function TrustBadges() {
   const badges = [
-    { icon: Shield, label: "100% Money Back Guarantee" },
+    { icon: Shield, label: "Money Back Guarantee" },
     { icon: Zap, label: "Instant Delivery" },
     { icon: Lock, label: "Secured by Razorpay" },
     { icon: Globe2, label: "10,000+ Destinations" },
-    { icon: Sparkles, label: "AI Powered Planning" },
+    { icon: Sparkles, label: "AI-Powered Planning" },
   ];
   return (
-    <section className="bg-card border-y border-border/60">
-      <div className="mx-auto max-w-6xl px-5 py-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+    <section className="border-y border-gold" style={{ background: "var(--ink-deep)" }}>
+      <div className="mx-auto max-w-7xl px-6 py-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
         {badges.map((b) => (
-          <div key={b.label} className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-secondary/40">
-            <div className="h-9 w-9 rounded-lg bg-[#FF6A00]/10 text-[#FF6A00] grid place-items-center shrink-0">
-              <b.icon className="h-4 w-4" />
-            </div>
-            <span className="text-xs sm:text-sm font-semibold leading-tight">{b.label}</span>
+          <div key={b.label} className="flex items-center gap-3 justify-center sm:justify-start">
+            <b.icon className="h-4 w-4 text-gold shrink-0" />
+            <span className="text-[11px] sm:text-xs font-medium tracking-[0.18em] uppercase text-foreground/75 leading-tight">
+              {b.label}
+            </span>
           </div>
         ))}
       </div>
@@ -50,50 +40,75 @@ export function TrustBadges() {
   );
 }
 
-/* -------------------- Testimonials (6) -------------------- */
+/* -------------------- Testimonials carousel -------------------- */
 const TESTIMONIALS = [
-  { name: "Priya Sharma", city: "Delhi", quote: "Planned my entire Rajasthan trip in minutes! Saved hours of research. The hidden gems section was amazing!" },
-  { name: "Rahul Verma", city: "Mumbai", quote: "Worth every rupee! Got a complete 7 day Jaipur itinerary instantly. My family loved the trip!" },
-  { name: "Anjali Singh", city: "Bangalore", quote: "Best travel planning tool for India! The budget breakdown saved us at least Rs.5000 on our trip!" },
-  { name: "Amit Patel", city: "Ahmedabad", quote: "Used Standard Plan for honeymoon planning. Everything was perfect! Highly recommend Wandr Wisely!" },
-  { name: "Sneha Gupta", city: "Jaipur", quote: "Finally a travel planner that understands Indian destinations! Sri Ganganagar coverage was spot on!" },
-  { name: "Vikram Kumar", city: "Hyderabad", quote: "Premium plan was totally worth it. Had WhatsApp support throughout my entire Rajasthan road trip!" },
+  { name: "Priya Sharma", city: "Delhi", quote: "Planned my entire Rajasthan trip in minutes. The hidden gems section was extraordinary." },
+  { name: "Rahul Verma", city: "Mumbai", quote: "Worth every rupee. A complete 7-day Jaipur itinerary, instantly. My family loved every moment." },
+  { name: "Anjali Singh", city: "Bangalore", quote: "The finest travel planner for India. The budget breakdown saved us nearly ₹5,000." },
+  { name: "Amit Patel", city: "Ahmedabad", quote: "Used the Standard Plan for our honeymoon. Everything was flawlessly orchestrated." },
+  { name: "Sneha Gupta", city: "Jaipur", quote: "A travel planner that truly understands India. The coverage was remarkably precise." },
+  { name: "Vikram Kumar", city: "Hyderabad", quote: "Premium plan was worth every paisa. WhatsApp support throughout our entire road trip." },
 ];
 
 export function TestimonialsGrid() {
+  // Duplicate list for seamless loop
+  const loop = [...TESTIMONIALS, ...TESTIMONIALS];
+
   return (
-    <section className="bg-warm/40 border-y border-border/60">
-      <div className="mx-auto max-w-6xl px-5 py-20">
-        <div className="text-center mb-12">
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[#FF6A00] mb-3">Loved by 500+ travelers</span>
-          <h2 className="font-display text-4xl md:text-5xl font-semibold mb-3">Real reviews from real travelers</h2>
-          <div className="flex items-center justify-center gap-1 text-[#FF6A00]">
-            {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-5 w-5 fill-current" />)}
-            <span className="ml-2 text-sm text-muted-foreground">4.9/5 average rating</span>
+    <section className="relative overflow-hidden border-y border-gold" style={{ background: "var(--ink-deep)" }}>
+      <div className="mx-auto max-w-7xl px-6 py-24">
+        <div className="text-center mb-16 relative">
+          <span
+            aria-hidden
+            className="absolute -top-8 left-1/2 -translate-x-1/2 font-display text-[12rem] leading-none text-gold/10 select-none pointer-events-none"
+          >
+            "
+          </span>
+          <div className="eyebrow mb-5 relative">Words from our travelers</div>
+          <h2 className="font-display text-4xl md:text-6xl font-medium mb-5 relative">Loved across the world</h2>
+          <div className="flex items-center justify-center gap-1.5 text-gold relative">
+            {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}
+            <span className="ml-3 text-xs tracking-[0.22em] uppercase text-muted-foreground">4.9 average</span>
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {TESTIMONIALS.map((t) => (
-            <figure key={t.name} className="p-6 rounded-3xl bg-card border border-border/60 shadow-soft flex flex-col hover:-translate-y-1 hover:shadow-warm transition-all duration-300">
-              <div className="flex items-center gap-1 text-[#FF6A00] mb-3">
-                {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}
-              </div>
-              <Quote className="h-5 w-5 text-[#FF6A00]/30 mb-2" />
-              <blockquote className="text-foreground/90 mb-5 flex-1 text-[15px] leading-relaxed">"{t.quote}"</blockquote>
-              <figcaption className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-[#FF6A00]/15 text-[#FF6A00] grid place-items-center font-bold text-sm">
-                  {t.name.charAt(0)}
+        <div
+          className="relative"
+          style={{
+            maskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)",
+            WebkitMaskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)",
+          }}
+        >
+          <div className="flex gap-6 animate-[scroll_60s_linear_infinite] hover:[animation-play-state:paused]" style={{ width: "max-content" }}>
+            {loop.map((t, i) => (
+              <figure
+                key={`${t.name}-${i}`}
+                className="w-[340px] shrink-0 p-7 rounded-2xl border border-gold flex flex-col"
+                style={{ background: "var(--surface)" }}
+              >
+                <Quote className="h-6 w-6 text-gold/40 mb-4" />
+                <blockquote className="font-display italic text-lg text-foreground/90 mb-6 flex-1 leading-relaxed">
+                  {t.quote}
+                </blockquote>
+                <div className="flex items-center gap-1 text-gold mb-3">
+                  {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-3 w-3 fill-current" />)}
                 </div>
-                <div>
-                  <div className="font-semibold text-sm">{t.name}</div>
-                  <div className="text-xs text-muted-foreground">{t.city}</div>
-                </div>
-              </figcaption>
-            </figure>
-          ))}
+                <figcaption>
+                  <div className="text-sm font-medium text-gold tracking-wide">{t.name}</div>
+                  <div className="text-[11px] tracking-[0.22em] uppercase text-muted-foreground mt-1">{t.city}</div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes scroll {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+      `}</style>
     </section>
   );
 }
@@ -110,24 +125,30 @@ export function UrgencyBanner() {
   const s = String(secs % 60).padStart(2, "0");
 
   return (
-    <div className="mx-auto max-w-6xl px-5 pt-8 -mb-6">
-      <div className="rounded-2xl bg-gradient-to-r from-[#FF6A00] to-[#FF8124] text-white p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-[0_14px_40px_-12px_rgba(255,106,0,0.55)]">
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-xl bg-white/20 grid place-items-center animate-pulse">
-            <Flame className="h-5 w-5" />
+    <div className="mx-auto max-w-6xl px-6 pt-12 -mb-4">
+      <div
+        className="rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 border border-gold-strong"
+        style={{
+          background: "var(--surface)",
+          borderColor: "var(--border-gold-strong)",
+        }}
+      >
+        <div className="flex items-center gap-4">
+          <div className="h-10 w-10 rounded-full border border-gold grid place-items-center text-gold">
+            <Flame className="h-4 w-4" />
           </div>
           <div>
-            <div className="font-bold text-base sm:text-lg leading-tight">⚡ Limited Time Offer · 60% OFF</div>
-            <div className="text-xs sm:text-sm text-white/90">Only 10 spots left today</div>
+            <div className="eyebrow text-gold mb-1">Limited offer · 60% off</div>
+            <div className="text-sm text-foreground/80">Only 10 spots left today</div>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <Clock className="h-4 w-4" />
-          <span className="text-sm font-medium">Offer ends in</span>
-          <div className="flex gap-1.5 font-mono font-bold text-base">
-            <span className="px-2.5 py-1 rounded-md bg-white/20 backdrop-blur tabular-nums">{h}</span>:
-            <span className="px-2.5 py-1 rounded-md bg-white/20 backdrop-blur tabular-nums">{m}</span>:
-            <span className="px-2.5 py-1 rounded-md bg-white/20 backdrop-blur tabular-nums">{s}</span>
+        <div className="flex items-center gap-3">
+          <Clock className="h-3.5 w-3.5 text-gold" />
+          <span className="text-[11px] tracking-[0.22em] uppercase text-muted-foreground">Ends in</span>
+          <div className="flex gap-1 font-display text-xl text-gold tabular-nums">
+            <span>{h}</span><span className="text-gold/50">:</span>
+            <span>{m}</span><span className="text-gold/50">:</span>
+            <span>{s}</span>
           </div>
         </div>
       </div>
@@ -137,48 +158,62 @@ export function UrgencyBanner() {
 
 /* -------------------- Comparison section -------------------- */
 export function ComparisonSection() {
-  const rows = [
-    { vs: "Google Search", them: "Hours of endless searching", us: "Complete plan in 10 seconds" },
-    { vs: "Travel Agent", them: "Rs.5,000+ commission per trip", us: "Just Rs.199 — keep the savings" },
-    { vs: "MakeMyTrip", them: "Only handles bookings", us: "Complete day-by-day planning" },
+  const features = [
+    { feature: "Planning time", others: "Hours of research", wandr: "10 seconds" },
+    { feature: "Cost", others: "₹5,000+ commission", wandr: "₹199 — keep the savings" },
+    { feature: "Day-by-day itinerary", others: false, wandr: true },
+    { feature: "Hidden gems", others: false, wandr: true },
+    { feature: "Budget in INR", others: false, wandr: true },
+    { feature: "Money-back guarantee", others: false, wandr: true },
   ];
+
   return (
-    <section className="mx-auto max-w-6xl px-5 py-20">
-      <div className="text-center mb-12">
-        <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[#FF6A00] mb-3">The Wandr advantage</span>
-        <h2 className="font-display text-4xl md:text-5xl font-semibold mb-3">Why Wandr Wisely vs Others</h2>
-        <p className="text-muted-foreground max-w-xl mx-auto">See how we stack up against the alternatives.</p>
+    <section className="mx-auto max-w-5xl px-6 py-24">
+      <div className="text-center mb-14">
+        <div className="eyebrow mb-5">The Wandr advantage</div>
+        <h2 className="font-display text-4xl md:text-6xl font-medium mb-4">Why travelers choose Wandr</h2>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-5">
-        {rows.map((r) => (
-          <div key={r.vs} className="rounded-3xl bg-card border border-border/60 overflow-hidden shadow-soft">
-            <div className="px-6 py-4 bg-secondary/60 border-b border-border/60">
-              <div className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">vs</div>
-              <div className="font-display text-xl font-semibold">{r.vs}</div>
-            </div>
-            <div className="p-6 space-y-4">
-              <div className="flex gap-3 items-start">
-                <div className="h-7 w-7 rounded-full bg-rose-100 text-rose-600 grid place-items-center shrink-0">
-                  <X className="h-4 w-4" strokeWidth={3} />
-                </div>
-                <div>
-                  <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{r.vs}</div>
-                  <div className="text-sm text-foreground/80 line-through decoration-rose-400/60">{r.them}</div>
-                </div>
-              </div>
-              <div className="flex gap-3 items-start">
-                <div className="h-7 w-7 rounded-full bg-[#FF6A00]/15 text-[#FF6A00] grid place-items-center shrink-0">
-                  <Check className="h-4 w-4" strokeWidth={3} />
-                </div>
-                <div>
-                  <div className="text-[11px] font-semibold uppercase tracking-wide text-[#FF6A00]">Wandr Wisely</div>
-                  <div className="text-sm font-semibold text-foreground">{r.us}</div>
-                </div>
-              </div>
-            </div>
+      <div
+        className="rounded-2xl overflow-hidden border border-gold"
+        style={{ background: "var(--surface)" }}
+      >
+        <div className="grid grid-cols-[1.4fr_1fr_1fr] text-[10px] sm:text-xs tracking-[0.22em] uppercase">
+          <div className="p-5 sm:p-6 text-muted-foreground border-b border-gold">Feature</div>
+          <div className="p-5 sm:p-6 text-muted-foreground border-b border-l border-gold text-center">Others</div>
+          <div
+            className="p-5 sm:p-6 text-center border-b border-l border-gold font-semibold"
+            style={{ background: "var(--gradient-gold)", color: "var(--ink)" }}
+          >
+            Wandr
           </div>
-        ))}
+
+          {features.map((row, i) => (
+            <div key={row.feature} className="contents">
+              <div className={`p-5 sm:p-6 text-foreground/90 text-sm normal-case tracking-normal ${i < features.length - 1 ? "border-b border-gold" : ""}`}>
+                {row.feature}
+              </div>
+              <div className={`p-5 sm:p-6 text-center border-l border-gold ${i < features.length - 1 ? "border-b" : ""}`}>
+                {typeof row.others === "boolean" ? (
+                  row.others
+                    ? <Check className="h-4 w-4 text-gold inline" />
+                    : <X className="h-4 w-4 text-muted-foreground inline" />
+                ) : (
+                  <span className="text-xs text-muted-foreground normal-case tracking-normal">{row.others}</span>
+                )}
+              </div>
+              <div className={`p-5 sm:p-6 text-center border-l border-gold ${i < features.length - 1 ? "border-b" : ""}`}>
+                {typeof row.wandr === "boolean" ? (
+                  row.wandr
+                    ? <Check className="h-4 w-4 text-gold inline" strokeWidth={2.5} />
+                    : <X className="h-4 w-4 text-muted-foreground inline" />
+                ) : (
+                  <span className="text-xs text-gold font-semibold normal-case tracking-normal">{row.wandr}</span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -187,21 +222,28 @@ export function ComparisonSection() {
 /* -------------------- Guarantee section -------------------- */
 export function GuaranteeSection() {
   return (
-    <section className="mx-auto max-w-5xl px-5 py-16">
-      <div className="rounded-3xl bg-gradient-to-br from-[#FF6A00] to-[#FF8124] p-8 sm:p-12 text-white shadow-[0_24px_60px_-24px_rgba(255,106,0,0.55)] flex flex-col sm:flex-row items-center gap-8 text-center sm:text-left">
+    <section className="mx-auto max-w-5xl px-6 py-20">
+      <div
+        className="rounded-2xl p-10 sm:p-14 border border-gold flex flex-col sm:flex-row items-center gap-10 text-center sm:text-left"
+        style={{ background: "var(--surface)" }}
+      >
         <div className="relative shrink-0">
-          <div className="h-32 w-32 rounded-full bg-white/15 backdrop-blur grid place-items-center border-4 border-white/30">
-            <BadgeCheck className="h-16 w-16" strokeWidth={2} />
-          </div>
-          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-white text-[#FF6A00] text-[10px] font-black uppercase tracking-wider whitespace-nowrap">
-            100% Guarantee
+          <div
+            className="h-28 w-28 rounded-full grid place-items-center border-2"
+            style={{
+              background: "rgba(201,168,76,0.08)",
+              borderColor: "var(--gold)",
+            }}
+          >
+            <BadgeCheck className="h-14 w-14 text-gold" strokeWidth={1.5} />
           </div>
         </div>
         <div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold mb-3">Not happy? Get every rupee back.</h2>
-          <p className="text-white/95 text-base sm:text-lg leading-relaxed">
-            We're so confident you'll love your itinerary, we back it with a <span className="font-bold">100% money-back guarantee</span>.
-            If you're not happy, we'll refund you — no questions asked.
+          <div className="eyebrow mb-4">100% Guarantee</div>
+          <h2 className="font-display text-3xl sm:text-5xl font-medium mb-4">Not satisfied? Every rupee returned.</h2>
+          <p className="text-foreground/75 text-base leading-relaxed">
+            We're so confident you'll love your itinerary, we back it with a <span className="text-gold">complete money-back guarantee</span>.
+            If it doesn't move you, we'll refund you. No questions asked.
           </p>
         </div>
       </div>
@@ -211,38 +253,42 @@ export function GuaranteeSection() {
 
 /* -------------------- FAQ -------------------- */
 const FAQS = [
-  { q: "How quickly will I get my itinerary?", a: "Instantly after payment! Your full day-by-day plan is unlocked the moment your Razorpay checkout completes." },
-  { q: "What if I don't like my itinerary?", a: "100% money back guarantee — no questions asked. Just email us within 7 days and we'll refund you in full." },
-  { q: "Can I plan trips outside Rajasthan?", a: "Yes! We cover all of India — from Kerala backwaters to Ladakh, Goa to the North-East." },
-  { q: "Which plan should I choose?", a: "Standard Plan is our most popular choice — perfect balance of features and price for week-long trips." },
-  { q: "Is my payment secure?", a: "Yes! All payments are securely processed by Razorpay with bank-grade encryption. We never see your card details." },
+  { q: "How quickly will I receive my itinerary?", a: "Instantly after payment. Your full day-by-day plan is unlocked the moment your Razorpay checkout completes." },
+  { q: "What if I'm not satisfied with my itinerary?", a: "100% money-back guarantee — no questions asked. Email us within 7 days and we'll refund you in full." },
+  { q: "Can I plan trips outside Rajasthan?", a: "Of course. We cover all of India — from Kerala backwaters to Ladakh, Goa to the North-East." },
+  { q: "Which plan should I choose?", a: "Our Standard plan is the most popular — the perfect balance of features and value for week-long journeys." },
+  { q: "Is my payment secure?", a: "Yes. All payments are processed by Razorpay with bank-grade encryption. We never see your card details." },
   { q: "Can I modify my itinerary?", a: "Standard plan includes 2 free revisions. Premium plan includes 5 revisions plus WhatsApp support." },
 ];
 
 export function FAQSection() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="mx-auto max-w-3xl px-5 py-20">
-      <div className="text-center mb-10">
-        <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[#FF6A00] mb-3">FAQ</span>
-        <h2 className="font-display text-4xl md:text-5xl font-semibold mb-3">Got questions? We've got answers.</h2>
+    <section className="mx-auto max-w-3xl px-6 py-24">
+      <div className="text-center mb-14">
+        <div className="eyebrow mb-5">Frequently asked</div>
+        <h2 className="font-display text-4xl md:text-6xl font-medium">Questions, answered.</h2>
       </div>
       <div className="space-y-3">
         {FAQS.map((f, i) => {
           const isOpen = open === i;
           return (
-            <div key={f.q} className={`rounded-2xl border transition-all ${isOpen ? "border-[#FF6A00] bg-card shadow-soft" : "border-border/60 bg-card hover:border-[#FF6A00]/40"}`}>
+            <div
+              key={f.q}
+              className="rounded-xl border border-gold transition-all"
+              style={{ background: "var(--surface)" }}
+            >
               <button
                 onClick={() => setOpen(isOpen ? null : i)}
-                className="w-full flex items-center justify-between gap-4 p-5 text-left"
+                className="w-full flex items-center justify-between gap-4 p-6 text-left"
                 aria-expanded={isOpen}
               >
-                <span className="font-semibold text-base sm:text-lg">{f.q}</span>
-                <ChevronDown className={`h-5 w-5 shrink-0 text-[#FF6A00] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+                <span className="font-display text-lg sm:text-xl font-medium pr-4">{f.q}</span>
+                <ChevronDown className={`h-4 w-4 shrink-0 text-gold transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
               </button>
               <div className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                 <div className="overflow-hidden">
-                  <p className="px-5 pb-5 text-muted-foreground leading-relaxed">{f.a}</p>
+                  <p className="px-6 pb-6 text-muted-foreground leading-relaxed text-[15px]">{f.a}</p>
                 </div>
               </div>
             </div>
