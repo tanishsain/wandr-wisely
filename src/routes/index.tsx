@@ -1,14 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  Search, Compass, Wallet, Sparkles, ArrowRight, MapPin,
-} from "lucide-react";
-import { useState } from "react";
+import { Compass, Wallet, Sparkles, ArrowRight } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { DestinationCard } from "@/components/destination-card";
-import { PricingButtonsRow, PricingPlans } from "@/components/pricing-plans";
+import { PricingPlans } from "@/components/pricing-plans";
+import { HeroGlobe, GoldParticles } from "@/components/hero-globe";
 import {
-  HeroSocialProof,
   TrustBadges,
   TestimonialsGrid,
   UrgencyBanner,
@@ -21,10 +18,10 @@ import { destinations } from "@/data/destinations";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Wandr — Discover places, travel on a budget" },
-      { name: "description", content: "Find famous places to visit and plan trips that fit your budget. Curated destinations across 6 continents with real cost breakdowns." },
-      { property: "og:title", content: "Wandr — Discover places, travel on a budget" },
-      { property: "og:description", content: "Find famous places to visit and plan trips that fit your budget." },
+      { title: "Wandr — Travel Further. Spend Less." },
+      { name: "description", content: "Curated journeys, intelligent itineraries, and budgets that breathe. Wandr is your luxury-minded travel companion for the modern explorer." },
+      { property: "og:title", content: "Wandr — Travel Further. Spend Less." },
+      { property: "og:description", content: "Curated journeys and intelligent itineraries for the modern explorer." },
     ],
     links: [{ rel: "canonical", href: "https://wandr-wisely.lovable.app/" }],
     scripts: [
@@ -74,202 +71,201 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
-  const [query, setQuery] = useState("");
-  const navigate = Route.useNavigate();
-
   const featured = destinations.slice(0, 6);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    navigate({ to: "/explore", search: { q: query.trim() } });
-  };
-
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ background: "var(--ink)" }}>
+      {/* Loading screen overlay — fades out on mount */}
+      <div
+        className="fixed inset-0 z-[100] grid place-items-center pointer-events-none loader-fade"
+        style={{ background: "var(--ink)" }}
+      >
+        <span className="font-display text-6xl font-medium text-gold-gradient">
+          Wandr
+        </span>
+      </div>
+
       <SiteHeader />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-warm">
-        <div className="absolute inset-0 bg-glow opacity-70 pointer-events-none" />
-        <div className="absolute -top-20 -right-20 h-80 w-80 rounded-full bg-sunset opacity-30 blur-3xl" />
-        <div className="absolute -bottom-32 -left-20 h-96 w-96 rounded-full bg-sun/30 blur-3xl" />
+      {/* ━━━ HERO ━━━ */}
+      <section
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        style={{ background: "var(--ink)" }}
+      >
+        <HeroGlobe />
+        <GoldParticles />
 
-        <div className="relative mx-auto max-w-6xl px-5 pt-16 pb-24 md:pt-24 md:pb-32 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-card border border-border/60 shadow-soft text-xs font-medium text-muted-foreground mb-8">
-            <Sparkles className="h-3.5 w-3.5 text-primary" />
-            25 hand-picked destinations · real budget tips
+        {/* Vignette */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, transparent 0%, rgba(8,12,24,0.6) 70%, var(--ink) 100%)",
+          }}
+        />
+
+        <div className="relative z-10 max-w-5xl mx-auto px-6 pt-32 pb-24 text-center lux-fade-up">
+          <div className="eyebrow mb-8 inline-block">
+            <span className="inline-block w-10 h-px bg-gold align-middle mr-4" />
+            Curated since 2024
+            <span className="inline-block w-10 h-px bg-gold align-middle ml-4" />
           </div>
 
-          <h1 className="font-display text-5xl md:text-7xl font-semibold tracking-tight text-foreground text-balance mb-6">
-            Travel further <br className="hidden md:block" />
-            <span className="bg-sunset bg-clip-text text-transparent">on less.</span>
+          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-balance mb-8 text-foreground">
+            Travel Further.
+            <br />
+            <span className="italic text-gold-gradient">Spend Less.</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 text-balance">
-            Discover the world's most beautiful places and plan trips that
-            don't drain your wallet. Wandr is your friendly travel companion.
+          <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto mb-12 leading-relaxed font-light">
+            Intelligent itineraries crafted for the modern explorer.
           </p>
 
-          <HeroSocialProof />
-
-          <form
-            onSubmit={handleSubmit}
-            className="max-w-xl mx-auto flex items-center gap-2 p-2 bg-card rounded-full border border-border shadow-warm"
-          >
-            <div className="flex-1 flex items-center gap-3 pl-4">
-              <Search className="h-5 w-5 text-muted-foreground shrink-0" />
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search a city or country…"
-                className="flex-1 bg-transparent py-3 outline-none text-base placeholder:text-muted-foreground"
-              />
-            </div>
-            <button
-              type="submit"
-              className="px-5 md:px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors flex items-center gap-2"
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              to="/explore"
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full text-xs font-semibold tracking-[0.22em] uppercase transition-all duration-300 hover:shadow-glow hover:-translate-y-0.5"
+              style={{ background: "var(--gradient-gold)", color: "var(--ink)" }}
             >
-              Explore
-              <ArrowRight className="h-4 w-4" />
-            </button>
-          </form>
-
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-6 text-sm text-muted-foreground">
-            <span>Trending:</span>
-            {["Bali", "Tokyo", "Lisbon", "Istanbul", "Mexico City"].map((c) => (
-              <Link
-                key={c}
-                to="/explore"
-                search={{ q: c }}
-                className="px-3 py-1 rounded-full bg-card border border-border/60 hover:border-primary hover:text-primary transition-colors"
-              >
-                {c}
-              </Link>
-            ))}
+              Explore Destinations
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <Link
+              to="/plan"
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full text-xs font-semibold tracking-[0.22em] uppercase border text-gold bg-transparent hover:bg-gold hover:text-primary-foreground transition-all duration-300"
+              style={{ borderColor: "var(--border-gold-strong)" }}
+            >
+              Plan a Trip
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
+        </div>
 
-          <div className="mt-10">
-            <p className="text-center text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">
-              Unlock your full trip plan
-            </p>
-            <PricingButtonsRow />
+        {/* Scroll indicator — pulsing gold line */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10">
+          <span className="text-[10px] tracking-[0.3em] uppercase text-gold/70">Scroll</span>
+          <div className="relative h-12 w-px bg-gold/15">
+            <div
+              className="absolute top-0 left-0 w-px h-full bg-gold scroll-line"
+              style={{ boxShadow: "0 0 8px rgba(201,168,76,0.8)" }}
+            />
           </div>
         </div>
       </section>
 
-      {/* Trust badges strip */}
       <TrustBadges />
 
-      {/* How it works */}
-      <section className="mx-auto max-w-6xl px-5 py-20">
-        <div className="text-center mb-14">
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-primary mb-3">How it works</span>
-          <h2 className="font-display text-4xl md:text-5xl font-semibold mb-4">
-            Three steps. Zero stress.
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Whether you're dreaming, planning, or counting coins, Wandr
-            makes it simple.
-          </p>
+      {/* ━━━ CURATED DESTINATIONS ━━━ */}
+      <section className="mx-auto max-w-7xl px-6 py-24">
+        <div className="flex items-end justify-between mb-14 flex-wrap gap-6">
+          <div>
+            <div className="eyebrow eyebrow-line mb-5">Curated Destinations</div>
+            <h2 className="font-display text-4xl md:text-6xl font-medium tracking-tight max-w-xl leading-[1.05]">
+              Places worth the journey.
+            </h2>
+          </div>
+          <Link
+            to="/explore"
+            className="group inline-flex items-center gap-2 text-xs font-semibold tracking-[0.22em] uppercase text-gold hover:gap-3 transition-all"
+          >
+            View all <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            {
-              icon: Compass,
-              tint: "bg-sun text-sun-foreground",
-              title: "Discover places",
-              desc: "Browse curated highlights for cities and countries — landmarks, food, hidden gems.",
-              to: "/explore" as const,
-              cta: "Explore destinations",
-            },
-            {
-              icon: Sparkles,
-              tint: "bg-primary text-primary-foreground",
-              title: "AI trip planner",
-              desc: "Generate a day-by-day itinerary tuned to your style, budget, and interests. Pro unlocks the full trip.",
-              to: "/plan" as const,
-              cta: "Try the AI planner",
-            },
-            {
-              icon: Wallet,
-              tint: "bg-leaf text-leaf-foreground",
-              title: "Estimate cost",
-              desc: "See realistic daily costs and tips to stretch every dollar further.",
-              to: "/estimate" as const,
-              cta: "Estimate my trip",
-            },
-          ].map((card) => (
-            <Link
-              key={card.title}
-              to={card.to}
-              className="group p-7 rounded-3xl bg-card border border-border/60 shadow-soft hover:shadow-warm hover:-translate-y-1 transition-all"
-            >
-              <div className={`h-12 w-12 rounded-2xl ${card.tint} grid place-items-center mb-5 shadow-soft`}>
-                <card.icon className="h-6 w-6" />
-              </div>
-              <h3 className="font-display text-2xl font-semibold mb-2">
-                {card.title}
-              </h3>
-              <p className="text-muted-foreground mb-5">{card.desc}</p>
-              <div className="text-primary font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
-                {card.cta} <ArrowRight className="h-4 w-4" />
-              </div>
-            </Link>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {featured.map((dest) => (
+            <DestinationCard key={dest.slug} dest={dest} />
           ))}
         </div>
       </section>
 
-      {/* Featured destinations */}
-      <section className="bg-secondary/40">
-        <div className="mx-auto max-w-6xl px-5 py-20">
-          <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
-            <div>
-              <h2 className="font-display text-4xl md:text-5xl font-semibold mb-2">
-                Wander somewhere new.
-              </h2>
-              <p className="text-muted-foreground">
-                Hand-picked spots that prove great trips don't need deep pockets.
-              </p>
-            </div>
-            <Link
-              to="/explore"
-              className="text-primary font-medium flex items-center gap-1 hover:gap-2 transition-all"
-            >
-              View all <ArrowRight className="h-4 w-4" />
-            </Link>
+      {/* ━━━ HOW IT WORKS ━━━ */}
+      <section
+        className="relative py-24 border-y border-gold overflow-hidden"
+        style={{ background: "var(--ink-deep)" }}
+      >
+        {/* Faint world map watermark */}
+        <div
+          className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 20% 30%, #c9a84c 1px, transparent 1.5px), radial-gradient(circle at 40% 50%, #c9a84c 1px, transparent 1.5px), radial-gradient(circle at 60% 35%, #c9a84c 1px, transparent 1.5px), radial-gradient(circle at 75% 55%, #c9a84c 1px, transparent 1.5px), radial-gradient(circle at 85% 30%, #c9a84c 1px, transparent 1.5px), radial-gradient(circle at 25% 65%, #c9a84c 1px, transparent 1.5px), radial-gradient(circle at 50% 75%, #c9a84c 1px, transparent 1.5px), radial-gradient(circle at 70% 70%, #c9a84c 1px, transparent 1.5px)",
+            backgroundSize: "200px 200px",
+          }}
+        />
+
+        <div className="relative mx-auto max-w-6xl px-6">
+          <div className="text-center mb-20">
+            <div className="eyebrow mb-5">How it works</div>
+            <h2 className="font-display text-4xl md:text-6xl font-medium tracking-tight mb-4">
+              Three steps. Zero compromise.
+            </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {featured.map((dest) => (
-              <DestinationCard key={dest.slug} dest={dest} />
+          <div className="relative grid md:grid-cols-3 gap-12 md:gap-6">
+            {/* Connecting line */}
+            <div
+              className="hidden md:block absolute top-8 left-[16%] right-[16%] h-px"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, var(--gold), transparent)",
+              }}
+            />
+
+            {[
+              { num: "01", icon: Compass, title: "Discover", desc: "Browse curated highlights for cities and countries — landmarks, food, hidden gems.", to: "/explore" as const, cta: "Explore destinations" },
+              { num: "02", icon: Sparkles, title: "Plan", desc: "Generate a day-by-day itinerary tuned to your style, budget, and interests.", to: "/plan" as const, cta: "Try the AI planner" },
+              { num: "03", icon: Wallet, title: "Travel", desc: "See realistic daily costs and tips to stretch every rupee further.", to: "/estimate" as const, cta: "Estimate my trip" },
+            ].map((step) => (
+              <Link
+                key={step.num}
+                to={step.to}
+                className="relative group text-center"
+              >
+                <div
+                  className="relative mx-auto h-16 w-16 rounded-full border-2 grid place-items-center mb-6 transition-all group-hover:scale-110"
+                  style={{
+                    background: "var(--ink)",
+                    borderColor: "var(--gold)",
+                  }}
+                >
+                  <span className="font-display text-lg text-gold">{step.num}</span>
+                </div>
+
+                <step.icon className="h-5 w-5 text-gold/70 mx-auto mb-4" strokeWidth={1.5} />
+
+                <h3 className="font-display text-3xl font-medium mb-3">{step.title}</h3>
+                <p className="text-muted-foreground mb-5 max-w-xs mx-auto leading-relaxed">
+                  {step.desc}
+                </p>
+                <div className="text-xs tracking-[0.22em] uppercase text-gold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                  {step.cta} <ArrowRight className="h-3 w-3" />
+                </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Popular Rajasthan destinations */}
-      <section className="mx-auto max-w-6xl px-5 py-20">
-        <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
+      {/* ━━━ INDIA SPOTLIGHT ━━━ */}
+      <section className="mx-auto max-w-7xl px-6 py-24">
+        <div className="flex items-end justify-between mb-14 flex-wrap gap-6">
           <div>
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-primary mb-3">India spotlight</span>
-            <h2 className="font-display text-4xl md:text-5xl font-semibold mb-2">
-              Popular Rajasthan destinations
+            <div className="eyebrow eyebrow-line mb-5">India Spotlight</div>
+            <h2 className="font-display text-4xl md:text-6xl font-medium tracking-tight max-w-xl leading-[1.05]">
+              The land of kings, reimagined.
             </h2>
-            <p className="text-muted-foreground max-w-xl">
-              Forts, palaces and dunes — the land of kings on a backpacker budget.
-            </p>
           </div>
           <Link
             to="/explore"
             search={{ q: "rajasthan" }}
-            className="text-primary font-medium flex items-center gap-1 hover:gap-2 transition-all"
+            className="text-xs font-semibold tracking-[0.22em] uppercase text-gold hover:gap-3 inline-flex items-center gap-2 transition-all"
           >
-            Explore Rajasthan <ArrowRight className="h-4 w-4" />
+            Explore Rajasthan <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
             { slug: "jaipur", name: "Jaipur", emoji: "🏰", tag: "Pink City", blurb: "Amber Fort, Hawa Mahal and bustling bazaars." },
             { slug: "jodhpur", name: "Jodhpur", emoji: "🔵", tag: "Blue City", blurb: "Mehrangarh Fort towering over indigo lanes." },
@@ -282,61 +278,59 @@ function HomePage() {
               key={c.slug}
               to="/explore"
               search={{ q: c.slug }}
-              className="group p-6 rounded-3xl bg-card border border-border/60 shadow-soft hover:shadow-warm hover:-translate-y-1 transition-all"
+              className="group p-7 rounded-2xl border border-gold hover:border-gold-strong transition-all duration-500 hover:-translate-y-1 hover:shadow-glow"
+              style={{ background: "var(--surface)" }}
             >
-              <div className="flex items-start justify-between mb-3">
-                <span className="text-4xl" aria-hidden>{c.emoji}</span>
-                <span className="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground font-semibold">
-                  {c.tag}
-                </span>
+              <div className="flex items-start justify-between mb-6">
+                <span className="text-5xl" aria-hidden>{c.emoji}</span>
+                <span className="eyebrow">{c.tag}</span>
               </div>
-              <h3 className="font-display text-2xl font-semibold mb-1 flex items-center gap-2">
-                {c.name}
-                <MapPin className="h-4 w-4 text-muted-foreground" />
-              </h3>
-              <p className="text-sm text-muted-foreground">{c.blurb}</p>
-              <div className="mt-4 text-primary text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
-                See guide <ArrowRight className="h-4 w-4" />
+              <h3 className="font-display text-3xl font-medium mb-3">{c.name}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">{c.blurb}</p>
+              <div className="text-[11px] tracking-[0.22em] uppercase text-gold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                See guide <ArrowRight className="h-3 w-3" />
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Testimonials */}
       <TestimonialsGrid />
 
-      {/* Comparison */}
       <ComparisonSection />
 
-      {/* CTA */}
-      <section className="mx-auto max-w-4xl px-5 py-20">
-        <div className="relative rounded-3xl bg-sunset p-10 md:p-16 text-center text-primary-foreground overflow-hidden shadow-warm">
-          <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-sun/40 blur-2xl" />
-          <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-sky/30 blur-2xl" />
-          <h2 className="relative font-display text-3xl md:text-5xl font-semibold mb-4 text-balance">
+      {/* ━━━ EDITORIAL CTA ━━━ */}
+      <section className="mx-auto max-w-5xl px-6 py-24">
+        <div
+          className="relative rounded-2xl p-12 md:p-20 text-center overflow-hidden border border-gold"
+          style={{ background: "var(--ink-deep)" }}
+        >
+          <div
+            className="absolute -top-20 -right-20 h-80 w-80 rounded-full"
+            style={{ background: "radial-gradient(circle, rgba(201,168,76,0.2), transparent 70%)", filter: "blur(40px)" }}
+          />
+          <div className="eyebrow mb-6 relative">Your next chapter</div>
+          <h2 className="relative font-display text-3xl md:text-5xl font-medium mb-6 text-balance leading-tight">
             The world is closer than you think.
           </h2>
-          <p className="relative text-primary-foreground/90 mb-8 max-w-xl mx-auto">
-            Pick a destination, set your budget, and let Wandr do the heavy lifting.
+          <p className="relative text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed">
+            Pick a destination, set your budget, and let Wandr orchestrate the rest.
           </p>
           <Link
             to="/plan"
-            className="relative inline-flex items-center gap-2 px-7 py-4 rounded-full bg-card text-primary font-semibold shadow-warm hover:shadow-glow hover:scale-105 transition-all"
+            className="relative inline-flex items-center gap-3 px-8 py-4 rounded-full text-xs font-semibold tracking-[0.22em] uppercase hover:shadow-glow transition-all hover:-translate-y-0.5"
+            style={{ background: "var(--gradient-gold)", color: "var(--ink)" }}
           >
-            Plan my next trip <ArrowRight className="h-4 w-4" />
+            Plan my next trip <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
       </section>
 
-      {/* Urgency + Pricing */}
       <UrgencyBanner />
       <PricingPlans />
 
-      {/* Money back guarantee */}
       <GuaranteeSection />
 
-      {/* FAQ */}
       <FAQSection />
 
       <SiteFooter />
