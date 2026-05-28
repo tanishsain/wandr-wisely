@@ -1,0 +1,363 @@
+{
+  "%23tanstack-start-plugin-adapters": {
+    "file": "assets/__23tanstack-start-plugin-adapters-Cwee5PKy.js",
+    "name": "__23tanstack-start-plugin-adapters",
+    "src": "%23tanstack-start-plugin-adapters",
+    "isDynamicEntry": true
+  },
+  "/home/runner/work/wandr-wisely/wandr-wisely/src/styles.css": {
+    "file": "assets/styles-DLnOLR8y.css",
+    "src": "/home/runner/work/wandr-wisely/wandr-wisely/src/styles.css"
+  },
+  "_affiliate-2eYY1u5Q.js": {
+    "file": "assets/affiliate-2eYY1u5Q.js",
+    "name": "affiliate",
+    "imports": [
+      "_site-footer-Cu9GkHUY.js"
+    ]
+  },
+  "_calendar-fMy52lZq.js": {
+    "file": "assets/calendar-fMy52lZq.js",
+    "name": "calendar",
+    "imports": [
+      "_site-footer-Cu9GkHUY.js"
+    ]
+  },
+  "_cities-B2BqSztH.js": {
+    "file": "assets/cities-B2BqSztH.js",
+    "name": "cities",
+    "imports": [
+      "_site-footer-Cu9GkHUY.js"
+    ]
+  },
+  "_clock-DVsMz_YE.js": {
+    "file": "assets/clock-DVsMz_YE.js",
+    "name": "clock",
+    "imports": [
+      "_site-footer-Cu9GkHUY.js"
+    ]
+  },
+  "_conversion-sections-BX8HSi99.js": {
+    "file": "assets/conversion-sections-BX8HSi99.js",
+    "name": "conversion-sections",
+    "imports": [
+      "_worker-entry-CVMFMino.js",
+      "_sparkles-CVG9Vr0A.js",
+      "_zap-C-9OYVtN.js",
+      "_clock-DVsMz_YE.js",
+      "_site-footer-Cu9GkHUY.js",
+      "_star-sBKfvAVq.js"
+    ]
+  },
+  "_createServerRpc-zjpbWzrX.js": {
+    "file": "assets/createServerRpc-zjpbWzrX.js",
+    "name": "createServerRpc",
+    "imports": [
+      "_worker-entry-CVMFMino.js"
+    ]
+  },
+  "_currency--B8lzbTJ.js": {
+    "file": "assets/currency--B8lzbTJ.js",
+    "name": "currency"
+  },
+  "_destination-card-CVrOIY2Z.js": {
+    "file": "assets/destination-card-CVrOIY2Z.js",
+    "name": "destination-card",
+    "imports": [
+      "_worker-entry-CVMFMino.js",
+      "_router-C-aH7qSq.js",
+      "_currency--B8lzbTJ.js",
+      "_site-footer-Cu9GkHUY.js"
+    ]
+  },
+  "_hotel-affiliate-card-CxfsFOmx.js": {
+    "file": "assets/hotel-affiliate-card-CxfsFOmx.js",
+    "name": "hotel-affiliate-card",
+    "imports": [
+      "_site-footer-Cu9GkHUY.js",
+      "_worker-entry-CVMFMino.js",
+      "_currency--B8lzbTJ.js",
+      "_affiliate-2eYY1u5Q.js"
+    ]
+  },
+  "_map-pin-CZEMfQ_2.js": {
+    "file": "assets/map-pin-CZEMfQ_2.js",
+    "name": "map-pin",
+    "imports": [
+      "_site-footer-Cu9GkHUY.js"
+    ]
+  },
+  "_router-C-aH7qSq.js": {
+    "file": "assets/router-C-aH7qSq.js",
+    "name": "router",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-CVMFMino.js",
+      "_types-CHm7Zrw6.js"
+    ],
+    "dynamicImports": [
+      "src/routes/plan.tsx?tsr-split=component",
+      "src/routes/explore.tsx?tsr-split=component",
+      "src/routes/estimate.tsx?tsr-split=component",
+      "src/routes/attractions.tsx?tsr-split=component",
+      "src/routes/about.tsx?tsr-split=component",
+      "src/routes/index.tsx?tsr-split=component",
+      "src/routes/blog.index.tsx?tsr-split=component",
+      "src/routes/blog.$slug.tsx?tsr-split=component",
+      "src/routes/blog.$slug.tsx?tsr-split=errorComponent",
+      "src/routes/blog.$slug.tsx?tsr-split=notFoundComponent"
+    ],
+    "assets": [
+      "assets/styles-DLnOLR8y.css"
+    ]
+  },
+  "_site-footer-Cu9GkHUY.js": {
+    "file": "assets/site-footer-Cu9GkHUY.js",
+    "name": "site-footer",
+    "imports": [
+      "_worker-entry-CVMFMino.js",
+      "_router-C-aH7qSq.js"
+    ]
+  },
+  "_sparkles-CVG9Vr0A.js": {
+    "file": "assets/sparkles-CVG9Vr0A.js",
+    "name": "sparkles",
+    "imports": [
+      "_site-footer-Cu9GkHUY.js"
+    ]
+  },
+  "_star-sBKfvAVq.js": {
+    "file": "assets/star-sBKfvAVq.js",
+    "name": "star",
+    "imports": [
+      "_site-footer-Cu9GkHUY.js"
+    ]
+  },
+  "_types-CHm7Zrw6.js": {
+    "file": "assets/types-CHm7Zrw6.js",
+    "name": "types"
+  },
+  "_wallet-BfH4tWYM.js": {
+    "file": "assets/wallet-BfH4tWYM.js",
+    "name": "wallet",
+    "imports": [
+      "_site-footer-Cu9GkHUY.js"
+    ]
+  },
+  "_worker-entry-CVMFMino.js": {
+    "file": "assets/worker-entry-CVMFMino.js",
+    "name": "worker-entry",
+    "dynamicImports": [
+      "tanstack-start-manifest:v",
+      "src/lib/opentripmap.functions.ts?tss-serverfn-split",
+      "src/lib/india-search.functions.ts?tss-serverfn-split",
+      "_router-C-aH7qSq.js",
+      "node_modules/@tanstack/react-start/dist/plugin/default-entry/start.ts",
+      "%23tanstack-start-plugin-adapters"
+    ]
+  },
+  "_zap-C-9OYVtN.js": {
+    "file": "assets/zap-C-9OYVtN.js",
+    "name": "zap",
+    "imports": [
+      "_site-footer-Cu9GkHUY.js"
+    ]
+  },
+  "node_modules/@tanstack/react-start/dist/plugin/default-entry/start.ts": {
+    "file": "assets/start-HYkvq4Ni.js",
+    "name": "start",
+    "src": "node_modules/@tanstack/react-start/dist/plugin/default-entry/start.ts",
+    "isDynamicEntry": true
+  },
+  "src/lib/india-search.functions.ts?tss-serverfn-split": {
+    "file": "assets/india-search.functions-Cy8IZY5T.js",
+    "name": "india-search.functions",
+    "src": "src/lib/india-search.functions.ts?tss-serverfn-split",
+    "isDynamicEntry": true,
+    "imports": [
+      "_createServerRpc-zjpbWzrX.js",
+      "_worker-entry-CVMFMino.js",
+      "_types-CHm7Zrw6.js"
+    ]
+  },
+  "src/lib/opentripmap.functions.ts?tss-serverfn-split": {
+    "file": "assets/opentripmap.functions-jMqmnkoR.js",
+    "name": "opentripmap.functions",
+    "src": "src/lib/opentripmap.functions.ts?tss-serverfn-split",
+    "isDynamicEntry": true,
+    "imports": [
+      "_createServerRpc-zjpbWzrX.js",
+      "_worker-entry-CVMFMino.js",
+      "_types-CHm7Zrw6.js"
+    ]
+  },
+  "src/routes/about.tsx?tsr-split=component": {
+    "file": "assets/about-BXfoblPn.js",
+    "name": "about",
+    "src": "src/routes/about.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-CVMFMino.js",
+      "_router-C-aH7qSq.js",
+      "_site-footer-Cu9GkHUY.js",
+      "_wallet-BfH4tWYM.js",
+      "_types-CHm7Zrw6.js"
+    ]
+  },
+  "src/routes/attractions.tsx?tsr-split=component": {
+    "file": "assets/attractions-n3EGUHA_.js",
+    "name": "attractions",
+    "src": "src/routes/attractions.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-CVMFMino.js",
+      "_router-C-aH7qSq.js",
+      "_site-footer-Cu9GkHUY.js",
+      "_cities-B2BqSztH.js",
+      "_affiliate-2eYY1u5Q.js",
+      "_currency--B8lzbTJ.js",
+      "_map-pin-CZEMfQ_2.js",
+      "_types-CHm7Zrw6.js"
+    ]
+  },
+  "src/routes/blog.$slug.tsx?tsr-split=component": {
+    "file": "assets/blog._slug-Dehbicw0.js",
+    "name": "blog._slug",
+    "src": "src/routes/blog.$slug.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-CVMFMino.js",
+      "_router-C-aH7qSq.js",
+      "_site-footer-Cu9GkHUY.js",
+      "_calendar-fMy52lZq.js",
+      "_clock-DVsMz_YE.js",
+      "_sparkles-CVG9Vr0A.js",
+      "_zap-C-9OYVtN.js",
+      "_map-pin-CZEMfQ_2.js",
+      "_types-CHm7Zrw6.js"
+    ]
+  },
+  "src/routes/blog.$slug.tsx?tsr-split=errorComponent": {
+    "file": "assets/blog._slug-B_sdWJ6L.js",
+    "name": "blog._slug",
+    "src": "src/routes/blog.$slug.tsx?tsr-split=errorComponent",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-CVMFMino.js"
+    ]
+  },
+  "src/routes/blog.$slug.tsx?tsr-split=notFoundComponent": {
+    "file": "assets/blog._slug-BH8YVYjA.js",
+    "name": "blog._slug",
+    "src": "src/routes/blog.$slug.tsx?tsr-split=notFoundComponent",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-CVMFMino.js",
+      "_router-C-aH7qSq.js",
+      "_types-CHm7Zrw6.js"
+    ]
+  },
+  "src/routes/blog.index.tsx?tsr-split=component": {
+    "file": "assets/blog.index-BxdD7kFv.js",
+    "name": "blog.index",
+    "src": "src/routes/blog.index.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-CVMFMino.js",
+      "_router-C-aH7qSq.js",
+      "_site-footer-Cu9GkHUY.js",
+      "_calendar-fMy52lZq.js",
+      "_clock-DVsMz_YE.js",
+      "_types-CHm7Zrw6.js"
+    ]
+  },
+  "src/routes/estimate.tsx?tsr-split=component": {
+    "file": "assets/estimate-DcoBH1NW.js",
+    "name": "estimate",
+    "src": "src/routes/estimate.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-CVMFMino.js",
+      "_site-footer-Cu9GkHUY.js",
+      "_router-C-aH7qSq.js",
+      "_currency--B8lzbTJ.js",
+      "_types-CHm7Zrw6.js"
+    ]
+  },
+  "src/routes/explore.tsx?tsr-split=component": {
+    "file": "assets/explore-UgHeR8Ao.js",
+    "name": "explore",
+    "src": "src/routes/explore.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-CVMFMino.js",
+      "_router-C-aH7qSq.js",
+      "_site-footer-Cu9GkHUY.js",
+      "_destination-card-CVrOIY2Z.js",
+      "_hotel-affiliate-card-CxfsFOmx.js",
+      "_types-CHm7Zrw6.js",
+      "_cities-B2BqSztH.js",
+      "_sparkles-CVG9Vr0A.js",
+      "_map-pin-CZEMfQ_2.js",
+      "_clock-DVsMz_YE.js",
+      "_star-sBKfvAVq.js",
+      "_currency--B8lzbTJ.js",
+      "_affiliate-2eYY1u5Q.js"
+    ]
+  },
+  "src/routes/index.tsx?tsr-split=component": {
+    "file": "assets/index-BGWJ26zD.js",
+    "name": "index",
+    "src": "src/routes/index.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-CVMFMino.js",
+      "_router-C-aH7qSq.js",
+      "_site-footer-Cu9GkHUY.js",
+      "_destination-card-CVrOIY2Z.js",
+      "_conversion-sections-BX8HSi99.js",
+      "_clock-DVsMz_YE.js",
+      "_wallet-BfH4tWYM.js",
+      "_sparkles-CVG9Vr0A.js",
+      "_types-CHm7Zrw6.js",
+      "_currency--B8lzbTJ.js",
+      "_zap-C-9OYVtN.js",
+      "_star-sBKfvAVq.js"
+    ]
+  },
+  "src/routes/plan.tsx?tsr-split=component": {
+    "file": "assets/plan-D8lV35Lh.js",
+    "name": "plan",
+    "src": "src/routes/plan.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-CVMFMino.js",
+      "_site-footer-Cu9GkHUY.js",
+      "_currency--B8lzbTJ.js",
+      "_sparkles-CVG9Vr0A.js",
+      "_conversion-sections-BX8HSi99.js",
+      "_clock-DVsMz_YE.js",
+      "_hotel-affiliate-card-CxfsFOmx.js",
+      "_router-C-aH7qSq.js",
+      "_zap-C-9OYVtN.js",
+      "_star-sBKfvAVq.js",
+      "_affiliate-2eYY1u5Q.js",
+      "_types-CHm7Zrw6.js"
+    ]
+  },
+  "tanstack-start-manifest:v": {
+    "file": "assets/_tanstack-start-manifest_v-Xh1zFvPi.js",
+    "name": "_tanstack-start-manifest_v",
+    "src": "tanstack-start-manifest:v",
+    "isDynamicEntry": true
+  },
+  "virtual:cloudflare/worker-entry": {
+    "file": "index.js",
+    "name": "index",
+    "src": "virtual:cloudflare/worker-entry",
+    "isEntry": true,
+    "imports": [
+      "_worker-entry-CVMFMino.js"
+    ]
+  }
+}
