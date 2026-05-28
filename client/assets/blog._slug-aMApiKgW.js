@@ -1,1 +1,0 @@
-import{j as e}from"./index-ABIBwTsC.js";const o=({error:r})=>e.jsx("div",{className:"min-h-screen grid place-items-center bg-background px-5",children:e.jsx("p",{className:"text-muted-foreground",children:r.message})});export{o as errorComponent};
